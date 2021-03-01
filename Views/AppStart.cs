@@ -16,5 +16,12 @@ namespace BloggerCookBook.Views
         {
             InitializeComponent();
         }
+
+        private void loginButton_Click(object sender, EventArgs e)
+        {
+            var mainMenu = new MainMenu();
+            mainMenu.Show();
+            Hide();
+        }
     }
 }
