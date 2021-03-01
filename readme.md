@@ -1,5 +1,5 @@
-#Blogger Cookbook
-###C# Software Development Capstone for WGU C868
+# Blogger Cookbook
+### C# Software Development Capstone for WGU C868
 
 1. Project topic and description:
 The project will be a digital recipe book and meal planner for a food blogger that wants a better way to store recipes and be able to plan meals on a daily, weekly, and monthly basis. This WinForm application will be able to add/edit/delete and store recipies, add/edit/delete and track meal plans, and generate reports of recipe usage and grocery lists on the bloggers computer. The application will be password protected to confirm confidentiality.
