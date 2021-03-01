@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BloggerCookBook.Controllers;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -25,8 +26,7 @@ namespace BloggerCookBook.Views
         private void recipesButton_Click(object sender, EventArgs e)
         {
             var recipes = new Recipes();
-            recipes.Show();
-            Hide();
+            Navigation.NavigateTo(recipes, this);
         }
 
         private void mealPlannerButton_Click(object sender, EventArgs e)

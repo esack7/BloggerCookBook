@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BloggerCookBook.Controllers;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -34,7 +35,7 @@ namespace BloggerCookBook.Views
 
         private void mainMenuButton_Click(object sender, EventArgs e)
         {
-            
+            Navigation.NavigateBack(this);
         }
 
         private void searchButton_Click(object sender, EventArgs e)
