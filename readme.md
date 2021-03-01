@@ -1,0 +1,8 @@
+#Blogger Cookbook
+###C# Software Development Capstone for WGU C868
+
+1. Project topic and description:
+The project will be a digital recipe book and meal planner for a food blogger that wants a better way to store recipes and be able to plan meals on a daily, weekly, and monthly basis. This WinForm application will be able to add/edit/delete and store recipies, add/edit/delete and track meal plans, and generate reports of recipe usage and grocery lists on the bloggers computer. The application will be password protected to confirm confidentiality.
+2. Project purpose/goals:
+The purpose of this project is to help the blogger “Whole Food Homemaker” digitally organize her recipies and food planning. Until this point the blogger has just just kept track of her recipes in three ring binder made up of hand written recipes and recipes the blogger printed off the web, a small library of cookbooks with sticky notes identifying the particular recipes. Due to the recent popularity increase of the “Whole Food Homemaker” and demand for new frequent blog posts, the bloggers current way of keeping track of and organization of recipes no longer works. The blogger requires this digital solution.
+The goals of this project are to create a windows application that is intuitive and easy for the blogger to use. The program will allow the blogger to input, store and organize recipes. The program will allow the blogger to meal plan. The program will create reports for the blogger. The program will be password protected so only the blogger can access the programs content. The program will keep recipes and meal plans organized which will allow the blogger to focus on the more important task of writing blog posts.
