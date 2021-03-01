@@ -24,7 +24,9 @@ namespace BloggerCookBook.Views
 
         private void recipesButton_Click(object sender, EventArgs e)
         {
-
+            var recipes = new Recipes();
+            recipes.Show();
+            Hide();
         }
 
         private void mealPlannerButton_Click(object sender, EventArgs e)
