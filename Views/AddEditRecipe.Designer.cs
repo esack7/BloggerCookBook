@@ -154,6 +154,7 @@ namespace BloggerCookBook.Views
             this.addToRecipeButton.TabIndex = 22;
             this.addToRecipeButton.Text = "Add to Recipe";
             this.addToRecipeButton.UseVisualStyleBackColor = true;
+            this.addToRecipeButton.Click += new System.EventHandler(this.addToRecipeButton_Click);
             // 
             // removeIngredientButton
             // 

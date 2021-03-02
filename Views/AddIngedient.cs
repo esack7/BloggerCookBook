@@ -11,9 +11,9 @@ using System.Windows.Forms;
 
 namespace BloggerCookBook.Views
 {
-    public partial class AddEditRecipe : Form
+    public partial class AddIngedient : Form
     {
-        public AddEditRecipe()
+        public AddIngedient()
         {
             InitializeComponent();
         }
@@ -21,12 +21,6 @@ namespace BloggerCookBook.Views
         private void cancelButton_Click(object sender, EventArgs e)
         {
             Navigation.NavigateBack(this);
-        }
-
-        private void addToRecipeButton_Click(object sender, EventArgs e)
-        {
-            var addIngredient = new AddIngedient();
-            Navigation.NavigateTo(addIngredient, this);
         }
     }
 }
