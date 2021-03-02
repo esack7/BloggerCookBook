@@ -20,12 +20,14 @@ namespace BloggerCookBook.Views
 
         private void addButton_Click(object sender, EventArgs e)
         {
-
+            var addEditRecipe = new AddEditRecipe();
+            Navigation.NavigateTo(addEditRecipe, this);
         }
 
         private void editButton_Click(object sender, EventArgs e)
         {
-
+            var addEditRecipe = new AddEditRecipe();
+            Navigation.NavigateTo(addEditRecipe, this);
         }
 
         private void deleteButton_Click(object sender, EventArgs e)
