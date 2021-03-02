@@ -299,6 +299,7 @@ namespace BloggerCookBook.Views
             this.createIngredientButton.TabIndex = 36;
             this.createIngredientButton.Text = "+";
             this.createIngredientButton.UseVisualStyleBackColor = true;
+            this.createIngredientButton.Click += new System.EventHandler(this.createIngredientButton_Click);
             // 
             // AddEditRecipe
             // 
