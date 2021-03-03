@@ -17,5 +17,15 @@ namespace BloggerCookBook.Models
         public DateTime CreatedDate { get; set; }
         public string ModifiedBy { get; set; }
         public DateTime ModifiedDate { get; set; }
+
+        public User(string username, string password, string createdBy, DateTime createdDate, string modifiedBy, DateTime modifiedDate)
+        {
+            Username = username;
+            Password = password;
+            CreatedBy = createdBy;
+            CreatedDate = createdDate;
+            ModifiedBy = modifiedBy;
+            ModifiedDate = modifiedDate;
+        }
     }
 }

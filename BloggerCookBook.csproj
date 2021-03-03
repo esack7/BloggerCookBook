@@ -77,8 +77,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\Navigation.cs" />
+    <Compile Include="Models\BookRecipe.cs" />
+    <Compile Include="Models\PersonalRecipe.cs" />
     <Compile Include="Models\Recipe.cs" />
     <Compile Include="Models\User.cs" />
+    <Compile Include="Models\WebRecipe.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Views\AddEditMeal.cs">

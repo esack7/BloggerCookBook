@@ -19,5 +19,17 @@ namespace BloggerCookBook.Models
         public DateTime CreatedDate { get; set; }
         public string ModifiedBy { get; set; }
         public DateTime ModifiedDate { get; set; }
+
+        public Recipe(int userId, string title, string category, string instructions, string createdBy, DateTime createdDate, string modifiedBy, DateTime modifiedDate)
+        {
+            UserId = userId;
+            Title = title;
+            Category = category;
+            Instructions = instructions;
+            CreatedBy = createdBy;
+            CreatedDate = createdDate;
+            ModifiedBy = modifiedBy;
+            ModifiedDate = modifiedDate;
+        }
     }
 }
