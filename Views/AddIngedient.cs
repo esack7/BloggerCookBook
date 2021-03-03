@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BloggerCookBook.Controllers;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -10,18 +11,16 @@ using System.Windows.Forms;
 
 namespace BloggerCookBook.Views
 {
-    public partial class AppStart : Form
+    public partial class AddIngedient : Form
     {
-        public AppStart()
+        public AddIngedient()
         {
             InitializeComponent();
         }
 
-        private void loginButton_Click(object sender, EventArgs e)
+        private void cancelButton_Click(object sender, EventArgs e)
         {
-            var mainMenu = new MainMenu();
-            mainMenu.Show();
-            Hide();
+            Navigation.NavigateBack(this);
         }
     }
 }
