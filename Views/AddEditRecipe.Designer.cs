@@ -42,8 +42,8 @@ namespace BloggerCookBook.Views
             this.removeIngredientButton = new System.Windows.Forms.Button();
             this.cancelButton = new System.Windows.Forms.Button();
             this.saveButton = new System.Windows.Forms.Button();
-            this.directionsLabel = new System.Windows.Forms.Label();
-            this.directionsTextBox = new System.Windows.Forms.TextBox();
+            this.instructionsLabel = new System.Windows.Forms.Label();
+            this.instructionsTextBox = new System.Windows.Forms.TextBox();
             this.personalTypeRadioButton = new System.Windows.Forms.RadioButton();
             this.webTypeRadioButton = new System.Windows.Forms.RadioButton();
             this.bookTypeRadioButton = new System.Windows.Forms.RadioButton();
@@ -187,23 +187,23 @@ namespace BloggerCookBook.Views
             this.saveButton.Text = "Save";
             this.saveButton.UseVisualStyleBackColor = true;
             // 
-            // directionsLabel
+            // instructionsLabel
             // 
-            this.directionsLabel.AutoSize = true;
-            this.directionsLabel.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.directionsLabel.Location = new System.Drawing.Point(12, 396);
-            this.directionsLabel.Name = "directionsLabel";
-            this.directionsLabel.Size = new System.Drawing.Size(104, 28);
-            this.directionsLabel.TabIndex = 26;
-            this.directionsLabel.Text = "Directions:";
+            this.instructionsLabel.AutoSize = true;
+            this.instructionsLabel.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.instructionsLabel.Location = new System.Drawing.Point(12, 396);
+            this.instructionsLabel.Name = "instructionsLabel";
+            this.instructionsLabel.Size = new System.Drawing.Size(117, 28);
+            this.instructionsLabel.TabIndex = 26;
+            this.instructionsLabel.Text = "Instructions:";
             // 
-            // directionsTextBox
+            // instructionsTextBox
             // 
-            this.directionsTextBox.Location = new System.Drawing.Point(17, 427);
-            this.directionsTextBox.Multiline = true;
-            this.directionsTextBox.Name = "directionsTextBox";
-            this.directionsTextBox.Size = new System.Drawing.Size(374, 163);
-            this.directionsTextBox.TabIndex = 27;
+            this.instructionsTextBox.Location = new System.Drawing.Point(17, 427);
+            this.instructionsTextBox.Multiline = true;
+            this.instructionsTextBox.Name = "instructionsTextBox";
+            this.instructionsTextBox.Size = new System.Drawing.Size(374, 163);
+            this.instructionsTextBox.TabIndex = 27;
             // 
             // personalTypeRadioButton
             // 
@@ -315,8 +315,8 @@ namespace BloggerCookBook.Views
             this.Controls.Add(this.bookTypeRadioButton);
             this.Controls.Add(this.webTypeRadioButton);
             this.Controls.Add(this.personalTypeRadioButton);
-            this.Controls.Add(this.directionsTextBox);
-            this.Controls.Add(this.directionsLabel);
+            this.Controls.Add(this.instructionsTextBox);
+            this.Controls.Add(this.instructionsLabel);
             this.Controls.Add(this.saveButton);
             this.Controls.Add(this.cancelButton);
             this.Controls.Add(this.removeIngredientButton);
@@ -355,8 +355,8 @@ namespace BloggerCookBook.Views
         private System.Windows.Forms.Button removeIngredientButton;
         private System.Windows.Forms.Button cancelButton;
         private System.Windows.Forms.Button saveButton;
-        private System.Windows.Forms.Label directionsLabel;
-        private System.Windows.Forms.TextBox directionsTextBox;
+        private System.Windows.Forms.Label instructionsLabel;
+        private System.Windows.Forms.TextBox instructionsTextBox;
         private System.Windows.Forms.RadioButton personalTypeRadioButton;
         private System.Windows.Forms.RadioButton webTypeRadioButton;
         private System.Windows.Forms.RadioButton bookTypeRadioButton;
