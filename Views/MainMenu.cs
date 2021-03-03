@@ -37,7 +37,8 @@ namespace BloggerCookBook.Views
 
         private void reportsButton_Click(object sender, EventArgs e)
         {
-
+            var reports = new Reports();
+            Navigation.NavigateTo(reports, this);
         }
     }
 }
