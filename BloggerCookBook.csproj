@@ -78,8 +78,11 @@
   <ItemGroup>
     <Compile Include="Controllers\Navigation.cs" />
     <Compile Include="Models\BookRecipe.cs" />
+    <Compile Include="Models\Ingredient.cs" />
+    <Compile Include="Models\IngredientByRecipe.cs" />
     <Compile Include="Models\PersonalRecipe.cs" />
     <Compile Include="Models\Recipe.cs" />
+    <Compile Include="Models\RecipeByMeal.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Models\WebRecipe.cs" />
     <Compile Include="Program.cs" />
