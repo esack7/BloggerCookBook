@@ -11,22 +11,16 @@ using System.Windows.Forms;
 
 namespace BloggerCookBook.Views
 {
-    public partial class MealPlanner : Form
+    public partial class AddEditMeal : Form
     {
-        public MealPlanner()
+        public AddEditMeal()
         {
             InitializeComponent();
         }
 
-        private void mainMenuButton_Click(object sender, EventArgs e)
+        private void cancelButton_Click(object sender, EventArgs e)
         {
             Navigation.NavigateBack(this);
-        }
-
-        private void addButton_Click(object sender, EventArgs e)
-        {
-            var addEditMeal = new AddEditMeal();
-            Navigation.NavigateTo(addEditMeal, this);
         }
     }
 }
