@@ -31,7 +31,8 @@ namespace BloggerCookBook.Views
 
         private void mealPlannerButton_Click(object sender, EventArgs e)
         {
-
+            var mealPlanner = new MealPlanner();
+            Navigation.NavigateTo(mealPlanner, this);
         }
 
         private void reportsButton_Click(object sender, EventArgs e)
