@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SQLite;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,6 +9,8 @@ namespace BloggerCookBook.Models
 {
     public class IngredientByRecipe
     {
+        [PrimaryKey, AutoIncrement]
+        public int Id { get; set; }
         public int IngredientId { get; set; }
         public int RecipeId { get; set; }
         public string MeasureUnit { get; set; }
