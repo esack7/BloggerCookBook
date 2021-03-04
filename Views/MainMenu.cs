@@ -13,32 +13,44 @@ namespace BloggerCookBook.Views
 {
     public partial class MainMenu : Form
     {
+        private bool exit = true;
         public MainMenu()
         {
             InitializeComponent();
         }
 
-        private void MainMenu_FormClosed(object sender, FormClosedEventArgs e)
+        private void MainMenu_FormClosing(object sender, FormClosingEventArgs e)
         {
-            Application.Exit();
+            if(exit)
+            {
+                Application.Exit();
+            }
         }
 
         private void recipesButton_Click(object sender, EventArgs e)
         {
-            var recipes = new Recipes();
-            Navigation.NavigateTo(recipes, this);
+            Navigation.NavigateTo(new Recipes(), this);
         }
 
         private void mealPlannerButton_Click(object sender, EventArgs e)
         {
-            var mealPlanner = new MealPlanner();
-            Navigation.NavigateTo(mealPlanner, this);
+            Navigation.NavigateTo(new MealPlanner(), this);
         }
 
         private void reportsButton_Click(object sender, EventArgs e)
         {
-            var reports = new Reports();
-            Navigation.NavigateTo(reports, this);
+            Navigation.NavigateTo(new Reports(), this);
+        }
+
+        private void logoutButton_Click(object sender, EventArgs e)
+        {
+            exit = false;
+            Navigation.NavigateBack(this);
+        }
+
+        private void exitButton_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
         }
     }
 }
