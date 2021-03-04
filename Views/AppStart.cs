@@ -23,6 +23,8 @@ namespace BloggerCookBook.Views
         {
             try
             {
+                userIdTextBox.Text = "test"; //remove after building
+                passwordTextBox.Text = "test"; //remove after building
                 bool loggedIn = Globals.LoginCurrentUser(userIdTextBox.Text, passwordTextBox.Text);
                 userIdTextBox.Text = "";
                 passwordTextBox.Text = "";

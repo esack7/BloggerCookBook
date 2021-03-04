@@ -13,6 +13,7 @@ namespace BloggerCookBook.Views
 {
     public partial class Recipes : Form
     {
+        private bool exit = true;
         public Recipes()
         {
             InitializeComponent();
@@ -20,14 +21,12 @@ namespace BloggerCookBook.Views
 
         private void addButton_Click(object sender, EventArgs e)
         {
-            var addEditRecipe = new AddEditRecipe();
-            Navigation.NavigateTo(addEditRecipe, this);
+            Navigation.NavigateTo(new AddEditRecipe(), this);
         }
 
         private void editButton_Click(object sender, EventArgs e)
         {
-            var addEditRecipe = new AddEditRecipe();
-            Navigation.NavigateTo(addEditRecipe, this);
+            Navigation.NavigateTo(new AddEditRecipe(), this);
         }
 
         private void deleteButton_Click(object sender, EventArgs e)
@@ -37,12 +36,21 @@ namespace BloggerCookBook.Views
 
         private void mainMenuButton_Click(object sender, EventArgs e)
         {
+            exit = false;
             Navigation.NavigateBack(this);
         }
 
         private void searchButton_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void Recipes_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if(exit)
+            {
+                Application.Exit();
+            }
         }
     }
 }
