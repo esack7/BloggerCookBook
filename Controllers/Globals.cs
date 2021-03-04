@@ -20,13 +20,14 @@ namespace BloggerCookBook.Controllers
             {
                 var database = new SQLiteDataService();
                 database.Initialize();
-
                 List<User> signedInUser = database.GetAllUsers().Where(user => user.Username == username).ToList();
+                database.Close();
 
                 if(username == "" || password == "")
                 {
                     throw new ArgumentNullException();
                 }
+
                 if (signedInUser.Count < 1)
                 {
                     throw new LoginException("The User Name you entered does not exist.");
@@ -36,9 +37,9 @@ namespace BloggerCookBook.Controllers
                 {
                     throw new LoginException("The password is incorrect");
                 }
+
                 currentUser = signedInUser.First();
                 signedIn = true;
-                database.Close();
             }
             catch(ArgumentNullException)
             {
