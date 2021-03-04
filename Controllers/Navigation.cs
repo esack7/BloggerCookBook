@@ -11,6 +11,10 @@ namespace BloggerCookBook.Controllers
     {
         private static Stack<Form> AppFormNavigationStack = new Stack<Form>();
 
+        public static void StartNavigation(Form startForm)
+        {
+            AppFormNavigationStack.Push(startForm);
+        }
         public static void NavigateTo(Form nextForm, Form currentForm)
         {
             AppFormNavigationStack.Push(currentForm);
@@ -24,5 +28,10 @@ namespace BloggerCookBook.Controllers
             currentForm.Close();
             previousForm.Show();
         }
+
+        public static Form PeekCurrentForm()
+        {
+            return AppFormNavigationStack.Peek();
+        } 
     }
 }

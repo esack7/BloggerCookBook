@@ -12,5 +12,6 @@ namespace BloggerCookBook.Controllers
         bool Initialize();
         void Close();
         void AddUser(User newUser);
+        List<User> GetAllUsers();
     }
 }
