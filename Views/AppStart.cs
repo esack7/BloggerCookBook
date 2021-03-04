@@ -1,4 +1,6 @@
-﻿using System;
+﻿using BloggerCookBook.Controllers;
+using BloggerCookBook.Exemptions;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -19,9 +21,15 @@ namespace BloggerCookBook.Views
 
         private void loginButton_Click(object sender, EventArgs e)
         {
-            var mainMenu = new MainMenu();
-            mainMenu.Show();
-            Hide();
+            try
+            {
+                bool loggedIn = Globals.LoginCurrentUser(userIdTextBox.Text, passwordTextBox.Text);
+                Navigation.NavigateTo(new MainMenu(), this);
+            }
+            catch (LoginException error)
+            {
+                MessageBox.Show(error.Message, "Instructions", MessageBoxButtons.OK);
+            }
         }
     }
 }

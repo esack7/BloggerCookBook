@@ -76,9 +76,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controllers\Globals.cs" />
     <Compile Include="Controllers\ILocalDataService.cs" />
     <Compile Include="Controllers\Navigation.cs" />
     <Compile Include="Controllers\SQLiteDataService.cs" />
+    <Compile Include="Exemptions\LoginExemption.cs" />
     <Compile Include="Models\BookRecipe.cs" />
     <Compile Include="Models\Ingredient.cs" />
     <Compile Include="Models\IngredientByRecipe.cs" />

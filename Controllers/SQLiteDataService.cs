@@ -44,5 +44,10 @@ namespace BloggerCookBook.Controllers
         {
             database.Insert(newUser);
         }
+
+        public List<User> GetAllUsers()
+        {
+            return database.Table<User>().ToList();
+        }
     }
 }
