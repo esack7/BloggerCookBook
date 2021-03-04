@@ -24,6 +24,8 @@ namespace BloggerCookBook.Views
             try
             {
                 bool loggedIn = Globals.LoginCurrentUser(userIdTextBox.Text, passwordTextBox.Text);
+                userIdTextBox.Text = "";
+                passwordTextBox.Text = "";
                 Navigation.NavigateTo(new MainMenu(), this);
             }
             catch (LoginException error)
