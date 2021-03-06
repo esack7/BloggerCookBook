@@ -53,6 +53,7 @@ namespace BloggerCookBook.Views
             this.typeALabel = new System.Windows.Forms.Label();
             this.typeBLabel = new System.Windows.Forms.Label();
             this.createIngredientButton = new System.Windows.Forms.Button();
+            this.secretCheckBox = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.listOfIngredientsDataGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.recipeIngredientsDataGridView)).BeginInit();
             this.SuspendLayout();
@@ -234,6 +235,7 @@ namespace BloggerCookBook.Views
             this.personalTypeRadioButton.TabStop = true;
             this.personalTypeRadioButton.Text = "Personal";
             this.personalTypeRadioButton.UseVisualStyleBackColor = true;
+            this.personalTypeRadioButton.CheckedChanged += new System.EventHandler(this.personalTypeRadioButton_CheckedChanged);
             // 
             // webTypeRadioButton
             // 
@@ -247,6 +249,7 @@ namespace BloggerCookBook.Views
             this.webTypeRadioButton.TabStop = true;
             this.webTypeRadioButton.Text = "Web";
             this.webTypeRadioButton.UseVisualStyleBackColor = true;
+            this.webTypeRadioButton.CheckedChanged += new System.EventHandler(this.webTypeRadioButton_CheckedChanged);
             // 
             // bookTypeRadioButton
             // 
@@ -260,6 +263,7 @@ namespace BloggerCookBook.Views
             this.bookTypeRadioButton.TabStop = true;
             this.bookTypeRadioButton.Text = "Book";
             this.bookTypeRadioButton.UseVisualStyleBackColor = true;
+            this.bookTypeRadioButton.CheckedChanged += new System.EventHandler(this.bookTypeRadioButton_CheckedChanged);
             // 
             // typeLabel
             // 
@@ -292,12 +296,11 @@ namespace BloggerCookBook.Views
             // 
             // typeALabel
             // 
-            this.typeALabel.AutoSize = true;
             this.typeALabel.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.typeALabel.Location = new System.Drawing.Point(359, 361);
+            this.typeALabel.Location = new System.Drawing.Point(316, 361);
             this.typeALabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.typeALabel.Name = "typeALabel";
-            this.typeALabel.Size = new System.Drawing.Size(54, 25);
+            this.typeALabel.Size = new System.Drawing.Size(83, 28);
             this.typeALabel.TabIndex = 34;
             this.typeALabel.Text = "Book";
             this.typeALabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -327,11 +330,24 @@ namespace BloggerCookBook.Views
             this.createIngredientButton.UseVisualStyleBackColor = true;
             this.createIngredientButton.Click += new System.EventHandler(this.createIngredientButton_Click);
             // 
+            // secretCheckBox
+            // 
+            this.secretCheckBox.AutoSize = true;
+            this.secretCheckBox.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.secretCheckBox.Location = new System.Drawing.Point(301, 440);
+            this.secretCheckBox.Name = "secretCheckBox";
+            this.secretCheckBox.Size = new System.Drawing.Size(150, 29);
+            this.secretCheckBox.TabIndex = 37;
+            this.secretCheckBox.Text = "Family Secret?";
+            this.secretCheckBox.UseVisualStyleBackColor = true;
+            this.secretCheckBox.Visible = false;
+            // 
             // AddEditRecipe
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(600, 489);
+            this.Controls.Add(this.secretCheckBox);
             this.Controls.Add(this.createIngredientButton);
             this.Controls.Add(this.typeBLabel);
             this.Controls.Add(this.typeALabel);
@@ -394,5 +410,6 @@ namespace BloggerCookBook.Views
         private System.Windows.Forms.Label typeALabel;
         private System.Windows.Forms.Label typeBLabel;
         private System.Windows.Forms.Button createIngredientButton;
+        private System.Windows.Forms.CheckBox secretCheckBox;
     }
 }

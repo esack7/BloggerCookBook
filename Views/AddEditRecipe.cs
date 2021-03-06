@@ -78,5 +78,36 @@ namespace BloggerCookBook.Views
             listOfIngredientsDataGridView.Columns["ModifiedDate"].Visible = false;
             Globals.FormatDisplayedData(listOfIngredientsDataGridView);
         }
+
+        private void personalTypeRadioButton_CheckedChanged(object sender, EventArgs e)
+        {
+            Point location = typeATextBox.Location;
+            secretCheckBox.Location = location;
+            secretCheckBox.Visible = true;
+            typeALabel.Visible = false;
+            typeATextBox.Visible = false;
+            typeBLabel.Visible = false;
+            typeBTextBox.Visible = false;
+        }
+
+        private void webTypeRadioButton_CheckedChanged(object sender, EventArgs e)
+        {
+            typeALabel.Text = "URL";
+            typeALabel.Visible = true;
+            typeATextBox.Visible = true;
+            typeBLabel.Visible = false;
+            typeBTextBox.Visible = false;
+            secretCheckBox.Visible = false;
+        }
+
+        private void bookTypeRadioButton_CheckedChanged(object sender, EventArgs e)
+        {
+            typeALabel.Text = "Book";
+            typeALabel.Visible = true;
+            typeATextBox.Visible = true;
+            typeBLabel.Visible = true;
+            typeBTextBox.Visible = true;
+            secretCheckBox.Visible = false;
+        }
     }
 }
