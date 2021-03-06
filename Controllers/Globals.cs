@@ -2,6 +2,7 @@
 using BloggerCookBook.Models;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,6 +13,7 @@ namespace BloggerCookBook.Controllers
     public static class Globals
     {
         public static User currentUser;
+        public static BindingList<Ingredient> AllIngredients;
 
         public static bool LoginCurrentUser(string username, string password)
         {
@@ -54,6 +56,35 @@ namespace BloggerCookBook.Controllers
                 MessageBox.Show(error.Message, "Instructions", MessageBoxButtons.OK);
             }
             return signedIn;
+        }
+
+        public static List<Ingredient> GetAllIngredientsFromDB()
+        {
+            var database = new SQLiteDataService();
+            database.Initialize();
+            var allIngredients = database.GetAllIngredients();
+            database.Close();
+            return allIngredients;
+        }
+
+        public static void FormatDisplayedData(DataGridView dataGridView)
+        {
+            bool showFill = true;
+            for (int i = 0; i < dataGridView.Columns.Count; i++)
+            {
+                if(dataGridView.Columns[i].Visible == true && showFill)
+                {
+                    dataGridView.Columns[i].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+                    showFill = false;
+                } 
+                else
+                {
+                    dataGridView.Columns[i].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+                }
+            }
+            dataGridView.RowHeadersVisible = false;
+            dataGridView.ReadOnly = true;
+            dataGridView.ClearSelection();
         }
     }
 }

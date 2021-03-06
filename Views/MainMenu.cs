@@ -1,4 +1,5 @@
 ﻿using BloggerCookBook.Controllers;
+using BloggerCookBook.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -51,6 +52,11 @@ namespace BloggerCookBook.Views
         private void exitButton_Click(object sender, EventArgs e)
         {
             Application.Exit();
+        }
+
+        private void MainMenu_Load(object sender, EventArgs e)
+        {
+            Globals.AllIngredients = new BindingList<Ingredient>(Globals.GetAllIngredientsFromDB());
         }
     }
 }

@@ -13,26 +13,45 @@ namespace BloggerCookBook.Views
 {
     public partial class AddEditRecipe : Form
     {
+        private bool exit = true;
         public AddEditRecipe()
         {
             InitializeComponent();
+            listOfIngredientsDataGridView.DataSource = Globals.AllIngredients;
         }
 
         private void cancelButton_Click(object sender, EventArgs e)
         {
+            exit = false;
             Navigation.NavigateBack(this);
         }
 
         private void addToRecipeButton_Click(object sender, EventArgs e)
         {
-            var addIngredient = new AddIngedient();
-            Navigation.NavigateTo(addIngredient, this);
+            Navigation.NavigateTo(new AddIngedient(), this);
         }
 
         private void createIngredientButton_Click(object sender, EventArgs e)
         {
-            var createIngredient = new CreateIngredient();
-            Navigation.NavigateTo(createIngredient, this);
+            Navigation.NavigateTo(new CreateIngredient(), this);
+        }
+
+        private void AddEditRecipe_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (exit)
+            {
+                Application.Exit();
+            }
+        }
+
+        private void listOfIngredientsDataGridView_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
+        {
+            listOfIngredientsDataGridView.Columns["Id"].Visible = false;
+            listOfIngredientsDataGridView.Columns["CreatedBy"].Visible = false;
+            listOfIngredientsDataGridView.Columns["CreatedDate"].Visible = false;
+            listOfIngredientsDataGridView.Columns["ModifiedBy"].Visible = false;
+            listOfIngredientsDataGridView.Columns["ModifiedDate"].Visible = false;
+            Globals.FormatDisplayedData(listOfIngredientsDataGridView);
         }
     }
 }

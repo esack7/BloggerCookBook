@@ -14,5 +14,6 @@ namespace BloggerCookBook.Controllers
         void AddUser(User newUser);
         List<User> GetAllUsers();
         void AddIngredient(Ingredient newIngredient);
+        List<Ingredient> GetAllIngredients();
     }
 }

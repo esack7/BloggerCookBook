@@ -54,5 +54,10 @@ namespace BloggerCookBook.Controllers
         {
             database.Insert(newIngredient);
         }
+
+        public List<Ingredient> GetAllIngredients()
+        {
+            return database.Table<Ingredient>().ToList();
+        }
     }
 }
