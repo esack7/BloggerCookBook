@@ -67,6 +67,16 @@ namespace BloggerCookBook.Controllers
             return allIngredients;
         }
 
+        public static void CreateNewIngredient(string title, string measureType)
+        {
+            var database = new SQLiteDataService();
+            database.Initialize();
+            var newIngredient = new Ingredient { Title = title, MeasureType = measureType, CreatedBy = currentUser.Username, CreatedDate = DateTime.Now };
+            database.AddIngredient(newIngredient);
+            database.Close();
+            AllIngredients.Add(newIngredient);
+        }
+
         public static void FormatDisplayedData(DataGridView dataGridView)
         {
             bool showFill = true;
@@ -84,6 +94,7 @@ namespace BloggerCookBook.Controllers
             }
             dataGridView.RowHeadersVisible = false;
             dataGridView.ReadOnly = true;
+            dataGridView.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dataGridView.ClearSelection();
         }
     }

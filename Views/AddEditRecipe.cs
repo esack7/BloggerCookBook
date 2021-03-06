@@ -18,6 +18,31 @@ namespace BloggerCookBook.Views
         {
             InitializeComponent();
             listOfIngredientsDataGridView.DataSource = Globals.AllIngredients;
+            categoryComboBox.Items.AddRange(new object[]
+            {
+                "Dressings & Sauces",
+                "Appetizers",
+                "Salads & Sandwiches",
+                "Soups & Stews",
+                "Vegetables",
+                "Rice, Grains, & Beans",
+                "Pasta",
+                "Eggs & Breakfast",
+                "Meat",
+                "Slow Cooker/Pressure Cooker",
+                "Bread & Pizza",
+                "Quick Breads & Muffins",
+                "Cookies",
+                "Brownies & Bars",
+                "Cake",
+                "Pie",
+                "Fruit Desserts",
+                "Drinks",
+                "Preserving",
+                "Freezer Meals",
+                "Food Storage",
+                "Kids in the Kitchen"
+            });
         }
 
         private void cancelButton_Click(object sender, EventArgs e)
