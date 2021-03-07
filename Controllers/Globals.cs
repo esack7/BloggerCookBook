@@ -15,6 +15,7 @@ namespace BloggerCookBook.Controllers
     {
         public static User currentUser;
         public static BindingList<IngredientViewModel> AllIngredients;
+        //public static BindingList<RecipeViewModel> AllUsersRecipes;
 
         public static bool LoginCurrentUser(string username, string password)
         {
@@ -57,6 +58,19 @@ namespace BloggerCookBook.Controllers
                 MessageBox.Show(error.Message, "Instructions", MessageBoxButtons.OK);
             }
             return signedIn;
+        }
+
+        public static void CreateNewRecipe(List<IngredientByRecipe> ingredientByRecipeList, Recipe newRecipe)
+        {
+            var database = new SQLiteDataService();
+            database.Initialize();
+            database.AddRecipe(newRecipe);
+            ingredientByRecipeList.ForEach(ibr =>
+            {
+                ibr.RecipeId = newRecipe.Id;
+                database.AddIngredientByRecipe(ibr);
+            });
+            database.Close();
         }
 
         public static List<IngredientViewModel> GetAllIngredientsFromDB()

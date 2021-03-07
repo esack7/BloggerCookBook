@@ -54,6 +54,60 @@ namespace BloggerCookBook.Views
             IngredientsInRecipeView.Add(ingredient);
         }
 
+        private void saveButton_Click(object sender, EventArgs e)
+        {
+            exit = false;
+            Recipe newRecipe;
+            var ingredientsByRecipeList = IngredientsInRecipeView.Select(iir => iir.GetIngredientByRecipe()).ToList();
+            if(personalTypeRadioButton.Checked)
+            {
+                newRecipe = new PersonalRecipe
+                {
+                    UserId = Globals.currentUser.Id,
+                    Title = titleTextBox.Text,
+                    Category = categoryComboBox.SelectedItem.ToString(),
+                    Instructions = instructionsTextBox.Text,
+                    CreatedBy = Globals.currentUser.Username,
+                    CreatedDate = DateTime.Now,
+                    Secret = secretCheckBox.Checked
+                };
+            } 
+            else if (webTypeRadioButton.Checked)
+            {
+                newRecipe = new WebRecipe
+                {
+                    UserId = Globals.currentUser.Id,
+                    Title = titleTextBox.Text,
+                    Category = categoryComboBox.SelectedItem.ToString(),
+                    Instructions = instructionsTextBox.Text,
+                    CreatedBy = Globals.currentUser.Username,
+                    CreatedDate = DateTime.Now,
+                    Url = typeATextBox.Text
+                };
+            }
+            else
+            {
+                newRecipe = new BookRecipe
+                {
+                    UserId = Globals.currentUser.Id,
+                    Title = titleTextBox.Text,
+                    Category = categoryComboBox.SelectedItem.ToString(),
+                    Instructions = instructionsTextBox.Text,
+                    CreatedBy = Globals.currentUser.Username,
+                    CreatedDate = DateTime.Now,
+                    BookTitle = typeATextBox.Text,
+                    BookAuthor = typeBTextBox.Text
+                };
+            }
+            //var recipeIdIsAddedToIngredientByRecipeList = ingredientsByRecipe.Select(ibr =>
+            //{
+            //    ibr.Id = newRecipe.Id;
+            //    return ibr;
+            //}).ToList();
+            Globals.CreateNewRecipe(ingredientsByRecipeList, newRecipe);
+            Navigation.NavigateBack(this);
+        }
+
         private void cancelButton_Click(object sender, EventArgs e)
         {
             exit = false;

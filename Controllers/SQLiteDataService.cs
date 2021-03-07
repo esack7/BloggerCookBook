@@ -50,6 +50,11 @@ namespace BloggerCookBook.Controllers
             return database.Table<User>().ToList();
         }
 
+        public void AddRecipe(Recipe newRecipe)
+        {
+            database.Insert(newRecipe);
+        }
+
         public void AddIngredient(Ingredient newIngredient)
         {
             database.Insert(newIngredient);
@@ -58,6 +63,11 @@ namespace BloggerCookBook.Controllers
         public List<Ingredient> GetAllIngredients()
         {
             return database.Table<Ingredient>().ToList();
+        }
+
+        public void AddIngredientByRecipe(IngredientByRecipe newIngredientByRecipe)
+        {
+            database.Insert(newIngredientByRecipe);
         }
     }
 }
