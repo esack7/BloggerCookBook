@@ -9,7 +9,7 @@ namespace BloggerCookBook.Models
 {
     public abstract class Recipe
     {
-        [PrimaryKey, AutoIncrement]
+        [PrimaryKey]
         public int Id { get; set; }
         public int UserId { get; set; }
         public string Title { get; set; }

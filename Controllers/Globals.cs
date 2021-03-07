@@ -16,6 +16,8 @@ namespace BloggerCookBook.Controllers
         public static User currentUser;
         public static BindingList<RecipeViewModel> AllUsersRecipes;
         public static BindingList<IngredientViewModel> AllIngredients;
+        
+        private static int recipeId = 0;
 
         public static bool LoginCurrentUser(string username, string password)
         {
@@ -62,8 +64,10 @@ namespace BloggerCookBook.Controllers
 
         public static void CreateNewRecipe(List<IngredientByRecipe> ingredientByRecipeList, Recipe newRecipe)
         {
+            recipeId++;
             var database = new SQLiteDataService();
             database.Initialize();
+            newRecipe.Id = recipeId;
             database.AddRecipe(newRecipe);
             ingredientByRecipeList.ForEach(ibr =>
             {
@@ -78,7 +82,14 @@ namespace BloggerCookBook.Controllers
         {
             var database = new SQLiteDataService();
             database.Initialize();
-            var recipeViewModels = database.GetAllCurrentUserRecipes(currentUser.Id).Select(recipe => new RecipeViewModel(recipe)).ToList();
+            var recipeViewModels = database.GetAllCurrentUserRecipes(currentUser.Id)
+                .Select(recipe => {
+                    if(recipe.Id > recipeId)
+                    {
+                        recipeId = recipe.Id;
+                    }
+                    return new RecipeViewModel(recipe);
+                 }).ToList();
             database.Close();
             return recipeViewModels;
         }
