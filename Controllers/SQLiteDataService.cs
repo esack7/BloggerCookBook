@@ -55,6 +55,15 @@ namespace BloggerCookBook.Controllers
             database.Insert(newRecipe);
         }
 
+        public List<Recipe> GetAllCurrentUserRecipes(int userId)
+        {
+            List<Recipe> listOfRecipes = new List<Recipe>();
+            database.Query<PersonalRecipe>($"SELECT * FROM PersonalRecipe WHERE UserId={userId}").ForEach(recipe => listOfRecipes.Add(recipe));
+            database.Query<WebRecipe>($"SELECT * FROM WebRecipe WHERE UserId={userId}").ForEach(recipe => listOfRecipes.Add(recipe));
+            database.Query<BookRecipe>($"SELECT * FROM BookRecipe WHERE UserId={userId}").ForEach(recipe => listOfRecipes.Add(recipe));
+            return listOfRecipes;
+        }
+
         public void AddIngredient(Ingredient newIngredient)
         {
             database.Insert(newIngredient);

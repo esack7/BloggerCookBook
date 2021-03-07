@@ -14,8 +14,8 @@ namespace BloggerCookBook.Controllers
     public static class Globals
     {
         public static User currentUser;
+        public static BindingList<RecipeViewModel> AllUsersRecipes;
         public static BindingList<IngredientViewModel> AllIngredients;
-        //public static BindingList<RecipeViewModel> AllUsersRecipes;
 
         public static bool LoginCurrentUser(string username, string password)
         {
@@ -71,6 +71,16 @@ namespace BloggerCookBook.Controllers
                 database.AddIngredientByRecipe(ibr);
             });
             database.Close();
+            AllUsersRecipes.Add(new RecipeViewModel(newRecipe));
+        }
+
+        public static List<RecipeViewModel> GetAllCurrentUserRecipesFromDB()
+        {
+            var database = new SQLiteDataService();
+            database.Initialize();
+            var recipeViewModels = database.GetAllCurrentUserRecipes(currentUser.Id).Select(recipe => new RecipeViewModel(recipe)).ToList();
+            database.Close();
+            return recipeViewModels;
         }
 
         public static List<IngredientViewModel> GetAllIngredientsFromDB()

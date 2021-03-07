@@ -17,6 +17,7 @@ namespace BloggerCookBook.Views
         public Recipes()
         {
             InitializeComponent();
+            recipesDataGridView.DataSource = Globals.AllUsersRecipes;
         }
 
         private void addButton_Click(object sender, EventArgs e)
@@ -51,6 +52,12 @@ namespace BloggerCookBook.Views
             {
                 Application.Exit();
             }
+        }
+
+        private void recipesDataGridView_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
+        {
+            Globals.FormatDisplayedData(recipesDataGridView);
+            recipesDataGridView.MultiSelect = false;
         }
     }
 }
