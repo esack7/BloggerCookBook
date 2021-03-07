@@ -1,4 +1,6 @@
 ﻿using BloggerCookBook.Controllers;
+using BloggerCookBook.Models;
+using BloggerCookBook.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -13,11 +15,13 @@ namespace BloggerCookBook.Views
 {
     public partial class AddEditRecipe : Form
     {
+        private BindingList<IngredientByRecipeViewModel> IngredientsInRecipeView = new BindingList<IngredientByRecipeViewModel>();
         private bool exit = true;
         public AddEditRecipe()
         {
             InitializeComponent();
             listOfIngredientsDataGridView.DataSource = Globals.AllIngredients;
+            recipeIngredientsDataGridView.DataSource = IngredientsInRecipeView;
             categoryComboBox.Items.AddRange(new object[]
             {
                 "Dressings & Sauces",
@@ -45,6 +49,11 @@ namespace BloggerCookBook.Views
             });
         }
 
+        public void AddIngredientToRecipe(IngredientByRecipeViewModel ingredient)
+        {
+            IngredientsInRecipeView.Add(ingredient);
+        }
+
         private void cancelButton_Click(object sender, EventArgs e)
         {
             exit = false;
@@ -53,7 +62,15 @@ namespace BloggerCookBook.Views
 
         private void addToRecipeButton_Click(object sender, EventArgs e)
         {
-            Navigation.NavigateTo(new AddIngedient(), this);
+            IngredientViewModel selectedIngredient = (IngredientViewModel)listOfIngredientsDataGridView.SelectedRows[0].DataBoundItem;
+            Navigation.NavigateTo(new AddIngedient(selectedIngredient.GetIngredient()), this);
+        }
+
+        private void removeIngredientButton_Click(object sender, EventArgs e)
+        {
+            var selectedRows = recipeIngredientsDataGridView.SelectedRows.Cast<DataGridViewRow>().ToList();
+            List<IngredientByRecipeViewModel> selectedIngredientsByRecipeView = selectedRows.Select(row => (IngredientByRecipeViewModel)row.DataBoundItem).ToList();
+            selectedIngredientsByRecipeView.ForEach(selected => IngredientsInRecipeView.Remove(selected));
         }
 
         private void createIngredientButton_Click(object sender, EventArgs e)
@@ -71,12 +88,13 @@ namespace BloggerCookBook.Views
 
         private void listOfIngredientsDataGridView_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
         {
-            listOfIngredientsDataGridView.Columns["Id"].Visible = false;
-            listOfIngredientsDataGridView.Columns["CreatedBy"].Visible = false;
-            listOfIngredientsDataGridView.Columns["CreatedDate"].Visible = false;
-            listOfIngredientsDataGridView.Columns["ModifiedBy"].Visible = false;
-            listOfIngredientsDataGridView.Columns["ModifiedDate"].Visible = false;
             Globals.FormatDisplayedData(listOfIngredientsDataGridView);
+            listOfIngredientsDataGridView.MultiSelect = false;
+        }
+
+        private void recipeIngredientsDataGridView_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
+        {
+            Globals.FormatDisplayedData(recipeIngredientsDataGridView);
         }
 
         private void personalTypeRadioButton_CheckedChanged(object sender, EventArgs e)

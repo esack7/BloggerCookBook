@@ -1,5 +1,6 @@
 ﻿using BloggerCookBook.Exemptions;
 using BloggerCookBook.Models;
+using BloggerCookBook.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -13,7 +14,7 @@ namespace BloggerCookBook.Controllers
     public static class Globals
     {
         public static User currentUser;
-        public static BindingList<Ingredient> AllIngredients;
+        public static BindingList<IngredientViewModel> AllIngredients;
 
         public static bool LoginCurrentUser(string username, string password)
         {
@@ -58,11 +59,11 @@ namespace BloggerCookBook.Controllers
             return signedIn;
         }
 
-        public static List<Ingredient> GetAllIngredientsFromDB()
+        public static List<IngredientViewModel> GetAllIngredientsFromDB()
         {
             var database = new SQLiteDataService();
             database.Initialize();
-            var allIngredients = database.GetAllIngredients();
+            var allIngredients = database.GetAllIngredients().Select(ingredient => new IngredientViewModel(ingredient)).ToList();
             database.Close();
             return allIngredients;
         }
@@ -74,7 +75,7 @@ namespace BloggerCookBook.Controllers
             var newIngredient = new Ingredient { Title = title, MeasureType = measureType, CreatedBy = currentUser.Username, CreatedDate = DateTime.Now };
             database.AddIngredient(newIngredient);
             database.Close();
-            AllIngredients.Add(newIngredient);
+            AllIngredients.Add(new IngredientViewModel(newIngredient));
         }
 
         public static void FormatDisplayedData(DataGridView dataGridView)
@@ -82,7 +83,7 @@ namespace BloggerCookBook.Controllers
             bool showFill = true;
             for (int i = 0; i < dataGridView.Columns.Count; i++)
             {
-                if(dataGridView.Columns[i].Visible == true && showFill)
+                if(showFill)
                 {
                     dataGridView.Columns[i].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
                     showFill = false;

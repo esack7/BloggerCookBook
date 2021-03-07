@@ -1,5 +1,6 @@
 ﻿using BloggerCookBook.Controllers;
 using BloggerCookBook.Models;
+using BloggerCookBook.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -56,7 +57,7 @@ namespace BloggerCookBook.Views
 
         private void MainMenu_Load(object sender, EventArgs e)
         {
-            Globals.AllIngredients = new BindingList<Ingredient>(Globals.GetAllIngredientsFromDB());
+            Globals.AllIngredients = new BindingList<IngredientViewModel>(Globals.GetAllIngredientsFromDB());
         }
     }
 }
