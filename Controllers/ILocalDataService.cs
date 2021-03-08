@@ -15,8 +15,12 @@ namespace BloggerCookBook.Controllers
         List<User> GetAllUsers();
         void AddRecipe(Recipe newRecipe);
         List<Recipe> GetAllCurrentUserRecipes(int userId);
+        void UpdateRecipe(Recipe recipe);
+        void DeleteRecipe(Recipe recipe);
         void AddIngredient(Ingredient newIngredient);
         List<Ingredient> GetAllIngredients();
         void AddIngredientByRecipe(IngredientByRecipe newIngredientByRecipe);
+        List<IngredientByRecipe> GetIngredientsByRecipe(int recipeId);
+        void DeleteIngredientsByRecipe(int recipeId);
     }
 }

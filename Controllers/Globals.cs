@@ -78,6 +78,27 @@ namespace BloggerCookBook.Controllers
             AllUsersRecipes.Add(new RecipeViewModel(newRecipe));
         }
 
+        public static void UpdateRecipe(List<IngredientByRecipe> ingredientByRecipeList, Recipe recipe, RecipeViewModel recipeView)
+        {
+            var originalRecipe = recipeView.GetRecipe();
+            var database = new SQLiteDataService();
+            database.Initialize();
+            database.UpdateRecipe(recipe);
+            database.DeleteIngredientsByRecipe(originalRecipe.Id);
+            ingredientByRecipeList.ForEach(ibr =>
+            {
+                ibr.RecipeId = originalRecipe.Id;
+                database.AddIngredientByRecipe(ibr);
+            });
+            database.Close();
+            var allUsersRecipesList = AllUsersRecipes.ToList();
+            AllUsersRecipes.Clear();
+            var index = allUsersRecipesList.IndexOf(recipeView);
+            allUsersRecipesList.RemoveAt(index);
+            allUsersRecipesList.Insert(index, new RecipeViewModel(recipe));
+            allUsersRecipesList.ForEach(rVM => AllUsersRecipes.Add(rVM));
+        }
+
         public static List<RecipeViewModel> GetAllCurrentUserRecipesFromDB()
         {
             var database = new SQLiteDataService();
@@ -92,6 +113,18 @@ namespace BloggerCookBook.Controllers
                  }).ToList();
             database.Close();
             return recipeViewModels;
+        }
+
+        public static void DeleteRecipes(List<RecipeViewModel> recipesToDelete)
+        {
+            var database = new SQLiteDataService();
+            database.Initialize();
+            recipesToDelete.ForEach(recipeView =>
+            {
+                AllUsersRecipes.Remove(recipeView);
+                database.DeleteRecipe(recipeView.GetRecipe());
+            });
+            database.Close();
         }
 
         public static List<IngredientViewModel> GetAllIngredientsFromDB()
@@ -111,6 +144,15 @@ namespace BloggerCookBook.Controllers
             database.AddIngredient(newIngredient);
             database.Close();
             AllIngredients.Add(new IngredientViewModel(newIngredient));
+        }
+
+        public static List<IngredientByRecipe> GetIngredientsInRecipe(int recipeId)
+        {
+            var database = new SQLiteDataService();
+            database.Initialize();
+            var ingredientsByRecipeList = database.GetIngredientsByRecipe(recipeId);
+            database.Close();
+            return ingredientsByRecipeList;
         }
 
         public static void FormatDisplayedData(DataGridView dataGridView)

@@ -16,6 +16,8 @@ namespace BloggerCookBook.Views
     public partial class AddEditRecipe : Form
     {
         private BindingList<IngredientByRecipeViewModel> IngredientsInRecipeView = new BindingList<IngredientByRecipeViewModel>();
+        private Recipe _recipe;
+        private RecipeViewModel _recipeView;
         private bool exit = true;
         public AddEditRecipe()
         {
@@ -49,6 +51,63 @@ namespace BloggerCookBook.Views
             });
         }
 
+        public AddEditRecipe(RecipeViewModel recipeView)
+        {
+            InitializeComponent();
+            _recipeView = recipeView;
+            _recipe = recipeView.GetRecipe();
+            listOfIngredientsDataGridView.DataSource = Globals.AllIngredients;
+            recipeIngredientsDataGridView.DataSource = IngredientsInRecipeView;
+            Globals.GetIngredientsInRecipe(_recipe.Id).ForEach(ibr => IngredientsInRecipeView.Add(new IngredientByRecipeViewModel(ibr)));
+            categoryComboBox.Items.AddRange(new object[]
+            {
+                "Dressings & Sauces",
+                "Appetizers",
+                "Salads & Sandwiches",
+                "Soups & Stews",
+                "Vegetables",
+                "Rice, Grains, & Beans",
+                "Pasta",
+                "Eggs & Breakfast",
+                "Meat",
+                "Slow Cooker/Pressure Cooker",
+                "Bread & Pizza",
+                "Quick Breads & Muffins",
+                "Cookies",
+                "Brownies & Bars",
+                "Cake",
+                "Pie",
+                "Fruit Desserts",
+                "Drinks",
+                "Preserving",
+                "Freezer Meals",
+                "Food Storage",
+                "Kids in the Kitchen"
+            });
+            titleTextBox.Text = _recipe.Title;
+            categoryComboBox.SelectedItem = _recipe.Category;
+            instructionsTextBox.Text = _recipe.Instructions;
+            if(_recipe.GetType() == typeof(PersonalRecipe))
+            {
+                var personalRecipe = (PersonalRecipe)_recipe;
+                personalTypeRadioButton.Checked = true;
+                secretCheckBox.Checked = personalRecipe.Secret;
+            }
+            if (_recipe.GetType() == typeof(WebRecipe))
+            {
+                var webRecipe = (WebRecipe)_recipe;
+                webTypeRadioButton.Checked = true;
+                typeATextBox.Text = webRecipe.Url;
+            }
+            if (_recipe.GetType() == typeof(BookRecipe))
+            {
+                var bookRecipe = (BookRecipe)_recipe;
+                bookTypeRadioButton.Checked = true;
+                typeATextBox.Text = bookRecipe.BookTitle;
+                typeBTextBox.Text = bookRecipe.BookAuthor;
+            }
+        }
+
         public void AddIngredientToRecipe(IngredientByRecipeViewModel ingredient)
         {
             IngredientsInRecipeView.Add(ingredient);
@@ -57,11 +116,15 @@ namespace BloggerCookBook.Views
         private void saveButton_Click(object sender, EventArgs e)
         {
             exit = false;
-            Recipe newRecipe;
+            bool editing = true;
+            if(_recipe is null)
+            {
+                editing = false;
+            }
             var ingredientsByRecipeList = IngredientsInRecipeView.Select(iir => iir.GetIngredientByRecipe()).ToList();
             if(personalTypeRadioButton.Checked)
             {
-                newRecipe = new PersonalRecipe
+                _recipe = new PersonalRecipe
                 {
                     UserId = Globals.currentUser.Id,
                     Title = titleTextBox.Text,
@@ -74,7 +137,7 @@ namespace BloggerCookBook.Views
             } 
             else if (webTypeRadioButton.Checked)
             {
-                newRecipe = new WebRecipe
+                _recipe = new WebRecipe
                 {
                     UserId = Globals.currentUser.Id,
                     Title = titleTextBox.Text,
@@ -87,7 +150,7 @@ namespace BloggerCookBook.Views
             }
             else
             {
-                newRecipe = new BookRecipe
+                _recipe = new BookRecipe
                 {
                     UserId = Globals.currentUser.Id,
                     Title = titleTextBox.Text,
@@ -99,13 +162,16 @@ namespace BloggerCookBook.Views
                     BookAuthor = typeBTextBox.Text
                 };
             }
-            //var recipeIdIsAddedToIngredientByRecipeList = ingredientsByRecipe.Select(ibr =>
-            //{
-            //    ibr.Id = newRecipe.Id;
-            //    return ibr;
-            //}).ToList();
-            Globals.CreateNewRecipe(ingredientsByRecipeList, newRecipe);
-            Navigation.NavigateBack(this);
+            if(editing)
+            {
+                Globals.UpdateRecipe(ingredientsByRecipeList, _recipe, _recipeView);
+                Navigation.NavigateBack(this);
+            } 
+            else
+            {
+                Globals.CreateNewRecipe(ingredientsByRecipeList, _recipe);
+                Navigation.NavigateBack(this);
+            }
         }
 
         private void cancelButton_Click(object sender, EventArgs e)

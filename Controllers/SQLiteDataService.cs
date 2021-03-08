@@ -64,6 +64,17 @@ namespace BloggerCookBook.Controllers
             return listOfRecipes;
         }
 
+        public void UpdateRecipe(Recipe recipe)
+        {
+            database.Update(recipe);
+        }
+
+        public void DeleteRecipe(Recipe recipe)
+        {
+            database.Execute($"DELETE FROM IngredientByRecipe where RecipeId={recipe.Id}");
+            database.Delete(recipe);
+        }
+
         public void AddIngredient(Ingredient newIngredient)
         {
             database.Insert(newIngredient);
@@ -77,6 +88,16 @@ namespace BloggerCookBook.Controllers
         public void AddIngredientByRecipe(IngredientByRecipe newIngredientByRecipe)
         {
             database.Insert(newIngredientByRecipe);
+        }
+
+        public List<IngredientByRecipe> GetIngredientsByRecipe(int recipeId)
+        {
+            return database.Query<IngredientByRecipe>($"SELECT * FROM IngredientByRecipe WHERE RecipeId={recipeId}");
+        }
+
+        public void DeleteIngredientsByRecipe(int recipeId)
+        {
+            database.Execute($"DELETE FROM IngredientByRecipe where RecipeId={recipeId}");
         }
     }
 }
