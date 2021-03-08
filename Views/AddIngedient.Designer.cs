@@ -45,8 +45,9 @@ namespace BloggerCookBook.Views
             this.addToRecipeLabel.Dock = System.Windows.Forms.DockStyle.Top;
             this.addToRecipeLabel.Font = new System.Drawing.Font("Segoe UI", 22F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.addToRecipeLabel.Location = new System.Drawing.Point(0, 0);
+            this.addToRecipeLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.addToRecipeLabel.Name = "addToRecipeLabel";
-            this.addToRecipeLabel.Size = new System.Drawing.Size(800, 62);
+            this.addToRecipeLabel.Size = new System.Drawing.Size(600, 50);
             this.addToRecipeLabel.TabIndex = 4;
             this.addToRecipeLabel.Text = "Add To Recipe";
             this.addToRecipeLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -56,36 +57,41 @@ namespace BloggerCookBook.Views
             this.nameLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.nameLabel.AutoSize = true;
             this.nameLabel.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.nameLabel.Location = new System.Drawing.Point(125, 116);
+            this.nameLabel.Location = new System.Drawing.Point(94, 94);
+            this.nameLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.nameLabel.Name = "nameLabel";
-            this.nameLabel.Size = new System.Drawing.Size(196, 32);
+            this.nameLabel.Size = new System.Drawing.Size(154, 25);
             this.nameLabel.TabIndex = 19;
             this.nameLabel.Text = "Ingredient Name";
             // 
             // nameTextBox
             // 
             this.nameTextBox.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.nameTextBox.Location = new System.Drawing.Point(331, 115);
+            this.nameTextBox.Location = new System.Drawing.Point(248, 93);
+            this.nameTextBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.nameTextBox.Name = "nameTextBox";
-            this.nameTextBox.Size = new System.Drawing.Size(312, 34);
+            this.nameTextBox.Size = new System.Drawing.Size(235, 29);
             this.nameTextBox.TabIndex = 18;
             // 
             // saveButton
             // 
             this.saveButton.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.saveButton.Location = new System.Drawing.Point(268, 389);
+            this.saveButton.Location = new System.Drawing.Point(201, 316);
+            this.saveButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.saveButton.Name = "saveButton";
-            this.saveButton.Size = new System.Drawing.Size(128, 49);
+            this.saveButton.Size = new System.Drawing.Size(96, 40);
             this.saveButton.TabIndex = 27;
             this.saveButton.Text = "Save";
             this.saveButton.UseVisualStyleBackColor = true;
+            this.saveButton.Click += new System.EventHandler(this.saveButton_Click);
             // 
             // cancelButton
             // 
             this.cancelButton.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cancelButton.Location = new System.Drawing.Point(431, 389);
+            this.cancelButton.Location = new System.Drawing.Point(323, 316);
+            this.cancelButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.cancelButton.Name = "cancelButton";
-            this.cancelButton.Size = new System.Drawing.Size(128, 49);
+            this.cancelButton.Size = new System.Drawing.Size(96, 40);
             this.cancelButton.TabIndex = 26;
             this.cancelButton.Text = "Cancel";
             this.cancelButton.UseVisualStyleBackColor = true;
@@ -95,18 +101,20 @@ namespace BloggerCookBook.Views
             // 
             this.unitComboBox.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.unitComboBox.FormattingEnabled = true;
-            this.unitComboBox.Location = new System.Drawing.Point(331, 195);
+            this.unitComboBox.Location = new System.Drawing.Point(248, 158);
+            this.unitComboBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.unitComboBox.Name = "unitComboBox";
-            this.unitComboBox.Size = new System.Drawing.Size(312, 36);
+            this.unitComboBox.Size = new System.Drawing.Size(235, 29);
             this.unitComboBox.TabIndex = 29;
             // 
             // unitLabel
             // 
             this.unitLabel.AutoSize = true;
             this.unitLabel.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.unitLabel.Location = new System.Drawing.Point(262, 196);
+            this.unitLabel.Location = new System.Drawing.Point(196, 159);
+            this.unitLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.unitLabel.Name = "unitLabel";
-            this.unitLabel.Size = new System.Drawing.Size(59, 32);
+            this.unitLabel.Size = new System.Drawing.Size(47, 25);
             this.unitLabel.TabIndex = 28;
             this.unitLabel.Text = "Unit";
             // 
@@ -114,25 +122,27 @@ namespace BloggerCookBook.Views
             // 
             this.amountLabel.AutoSize = true;
             this.amountLabel.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.amountLabel.Location = new System.Drawing.Point(220, 275);
+            this.amountLabel.Location = new System.Drawing.Point(165, 223);
+            this.amountLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.amountLabel.Name = "amountLabel";
-            this.amountLabel.Size = new System.Drawing.Size(101, 32);
+            this.amountLabel.Size = new System.Drawing.Size(79, 25);
             this.amountLabel.TabIndex = 31;
             this.amountLabel.Text = "Amount";
             // 
             // amountTextBox
             // 
             this.amountTextBox.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.amountTextBox.Location = new System.Drawing.Point(331, 274);
+            this.amountTextBox.Location = new System.Drawing.Point(248, 223);
+            this.amountTextBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.amountTextBox.Name = "amountTextBox";
-            this.amountTextBox.Size = new System.Drawing.Size(137, 34);
+            this.amountTextBox.Size = new System.Drawing.Size(104, 29);
             this.amountTextBox.TabIndex = 30;
             // 
             // AddIngedient
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(600, 366);
             this.Controls.Add(this.amountLabel);
             this.Controls.Add(this.amountTextBox);
             this.Controls.Add(this.unitComboBox);
@@ -142,9 +152,11 @@ namespace BloggerCookBook.Views
             this.Controls.Add(this.nameLabel);
             this.Controls.Add(this.nameTextBox);
             this.Controls.Add(this.addToRecipeLabel);
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "AddIngedient";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "AddIngedient";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.AddIngedient_FormClosing);
             this.ResumeLayout(false);
             this.PerformLayout();
 
