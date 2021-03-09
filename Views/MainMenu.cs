@@ -59,6 +59,7 @@ namespace BloggerCookBook.Views
         {
             Globals.AllIngredients = new BindingList<IngredientViewModel>(Globals.GetAllIngredientsFromDB());
             Globals.AllUsersRecipes = new BindingList<RecipeViewModel>(Globals.GetAllCurrentUserRecipesFromDB());
+            Globals.AllUsersMeals = new BindingList<MealViewModel>(Globals.GetAllCurrentUserMeals());
         }
     }
 }

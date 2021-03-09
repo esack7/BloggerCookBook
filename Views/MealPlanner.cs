@@ -1,4 +1,5 @@
 ﻿using BloggerCookBook.Controllers;
+using BloggerCookBook.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -17,6 +18,7 @@ namespace BloggerCookBook.Views
         public MealPlanner()
         {
             InitializeComponent();
+            mealsDataGridView.DataSource = Globals.AllUsersMeals;
         }
 
         private void mainMenuButton_Click(object sender, EventArgs e)
@@ -30,12 +32,24 @@ namespace BloggerCookBook.Views
             Navigation.NavigateTo(new AddEditMeal(), this);
         }
 
+        private void deleteButton_Click(object sender, EventArgs e)
+        {
+            var selectedMeal = (MealViewModel)mealsDataGridView.SelectedRows[0].DataBoundItem;
+            Globals.DeleteMeal(selectedMeal);
+        }
+
         private void MealPlanner_FormClosing(object sender, FormClosingEventArgs e)
         {
             if (exit)
             {
                 Application.Exit();
             }
+        }
+
+        private void mealsDataGridView_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
+        {
+            Globals.FormatDisplayedData(mealsDataGridView);
+            mealsDataGridView.MultiSelect = false;
         }
     }
 }

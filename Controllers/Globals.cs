@@ -14,6 +14,7 @@ namespace BloggerCookBook.Controllers
     public static class Globals
     {
         public static User currentUser;
+        public static BindingList<MealViewModel> AllUsersMeals;
         public static BindingList<RecipeViewModel> AllUsersRecipes;
         public static BindingList<IngredientViewModel> AllIngredients;
         
@@ -169,6 +170,26 @@ namespace BloggerCookBook.Controllers
             }).ToList().ForEach(rbm => {
                 database.AddRecipeByMeal(rbm);
             });
+            database.Close();
+            AllUsersMeals.Add(new MealViewModel(meal));
+        }
+
+        public static List<MealViewModel> GetAllCurrentUserMeals()
+        {
+            var database = new SQLiteDataService();
+            database.Initialize();
+            var mealViewModels = database.GetAllCurrentUserMeals(currentUser.Id).Select(meal => new MealViewModel(meal)).ToList();
+            database.Close();
+            return mealViewModels;
+        }
+
+        public static void DeleteMeal(MealViewModel mealView)
+        {
+            var database = new SQLiteDataService();
+            database.Initialize();
+            database.DeleteMeal(mealView.GetMeal());
+            database.Close();
+            AllUsersMeals.Remove(mealView);
         }
 
         public static void FormatDisplayedData(DataGridView dataGridView)

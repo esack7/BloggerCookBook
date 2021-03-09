@@ -66,6 +66,7 @@ namespace BloggerCookBook.Views
             this.deleteButton.TabIndex = 19;
             this.deleteButton.Text = "Delete";
             this.deleteButton.UseVisualStyleBackColor = true;
+            this.deleteButton.Click += new System.EventHandler(this.deleteButton_Click);
             // 
             // editButton
             // 
@@ -100,6 +101,7 @@ namespace BloggerCookBook.Views
             this.mealsDataGridView.RowTemplate.Height = 24;
             this.mealsDataGridView.Size = new System.Drawing.Size(243, 267);
             this.mealsDataGridView.TabIndex = 16;
+            this.mealsDataGridView.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.mealsDataGridView_DataBindingComplete);
             // 
             // mealPlannerLabel
             // 

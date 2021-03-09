@@ -110,5 +110,16 @@ namespace BloggerCookBook.Controllers
         {
             database.Insert(recipeByMeal);
         }
+
+        public List<Meal> GetAllCurrentUserMeals(int userId)
+        {
+            return database.Query<Meal>($"SELECT * FROM Meal WHERE UserId={userId}");
+        }
+
+        public void DeleteMeal(Meal meal)
+        {
+            database.Execute($"DELETE FROM RecipeByMeal where MealId={meal.Id}");
+            database.Delete(meal);
+        }
     }
 }
