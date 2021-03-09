@@ -26,6 +26,7 @@ namespace BloggerCookBook.Controllers
 
             results.Add(database.CreateTable<IngredientByRecipe>());
             results.Add(database.CreateTable<RecipeByMeal>());
+            results.Add(database.CreateTable<Meal>());
 
             foreach (var result in results)
             {
@@ -98,6 +99,16 @@ namespace BloggerCookBook.Controllers
         public void DeleteIngredientsByRecipe(int recipeId)
         {
             database.Execute($"DELETE FROM IngredientByRecipe where RecipeId={recipeId}");
+        }
+
+        public void AddMeal(Meal meal)
+        {
+            database.Insert(meal);
+        }
+
+        public void AddRecipeByMeal(RecipeByMeal recipeByMeal)
+        {
+            database.Insert(recipeByMeal);
         }
     }
 }

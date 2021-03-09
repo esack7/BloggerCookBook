@@ -1,4 +1,6 @@
 ﻿using BloggerCookBook.Controllers;
+using BloggerCookBook.Models;
+using BloggerCookBook.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -13,14 +15,80 @@ namespace BloggerCookBook.Views
 {
     public partial class AddEditMeal : Form
     {
+        private BindingList<RecipeViewModel> mealRecipes = new BindingList<RecipeViewModel>();
+        private bool exit = true;
         public AddEditMeal()
         {
             InitializeComponent();
+            listOfRecipesDataGridView.DataSource = Globals.AllUsersRecipes;
+            mealRecipesDataGridView.DataSource = mealRecipes;
+            typeComboBox.Items.AddRange(new object[]
+            {
+                "Breakfast",
+                "Brunch",
+                "Lunch",
+                "Dinner",
+                "Snack",
+                "Special Occasion"
+            });
+        }
+
+        private void addToMealButton_Click(object sender, EventArgs e)
+        {
+            var selectedRecipe = (RecipeViewModel)listOfRecipesDataGridView.SelectedRows[0].DataBoundItem;
+            if (!mealRecipes.Contains(selectedRecipe))
+            {
+                mealRecipes.Add(selectedRecipe);
+            }
+        }
+
+        private void removeRecipeButton_Click(object sender, EventArgs e)
+        {
+            mealRecipesDataGridView.SelectedRows.Cast<DataGridViewRow>()
+                .Select(row => (RecipeViewModel)row.DataBoundItem).ToList()
+                .ForEach(selected => mealRecipes.Remove(selected));
+        }
+
+        private void saveButton_Click(object sender, EventArgs e)
+        {
+            exit = false;
+            var meal = new Meal
+            {
+                UserId = Globals.currentUser.Id,
+                Title = titleTextBox.Text,
+                Type = typeComboBox.SelectedItem.ToString(),
+                Date = dateTimePicker.Value,
+                Notes = notesTextBox.Text,
+                CreatedDate = DateTime.Now,
+                CreatedBy = Globals.currentUser.Username
+            };
+            Globals.CreateNewMeal(meal, mealRecipes.ToList());
+            Navigation.NavigateBack(this);
         }
 
         private void cancelButton_Click(object sender, EventArgs e)
         {
+            exit = false;
             Navigation.NavigateBack(this);
+        }
+
+        private void AddEditMeal_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (exit)
+            {
+                Application.Exit();
+            }
+        }
+
+        private void listOfRecipesDataGridView_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
+        {
+            Globals.FormatDisplayedData(listOfRecipesDataGridView);
+            listOfRecipesDataGridView.MultiSelect = false;
+        }
+
+        private void mealRecipesDataGridView_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
+        {
+            Globals.FormatDisplayedData(mealRecipesDataGridView);
         }
     }
 }

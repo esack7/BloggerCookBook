@@ -13,6 +13,7 @@ namespace BloggerCookBook.Views
 {
     public partial class MealPlanner : Form
     {
+        private bool exit = true;
         public MealPlanner()
         {
             InitializeComponent();
@@ -20,13 +21,21 @@ namespace BloggerCookBook.Views
 
         private void mainMenuButton_Click(object sender, EventArgs e)
         {
+            exit = false;
             Navigation.NavigateBack(this);
         }
 
         private void addButton_Click(object sender, EventArgs e)
         {
-            var addEditMeal = new AddEditMeal();
-            Navigation.NavigateTo(addEditMeal, this);
+            Navigation.NavigateTo(new AddEditMeal(), this);
+        }
+
+        private void MealPlanner_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (exit)
+            {
+                Application.Exit();
+            }
         }
     }
 }

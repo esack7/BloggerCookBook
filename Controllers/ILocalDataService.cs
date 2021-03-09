@@ -22,5 +22,7 @@ namespace BloggerCookBook.Controllers
         void AddIngredientByRecipe(IngredientByRecipe newIngredientByRecipe);
         List<IngredientByRecipe> GetIngredientsByRecipe(int recipeId);
         void DeleteIngredientsByRecipe(int recipeId);
+        void AddMeal(Meal meal);
+        void AddRecipeByMeal(RecipeByMeal recipeByMeal);
     }
 }

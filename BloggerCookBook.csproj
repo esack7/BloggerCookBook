@@ -84,6 +84,7 @@
     <Compile Include="Models\BookRecipe.cs" />
     <Compile Include="Models\Ingredient.cs" />
     <Compile Include="Models\IngredientByRecipe.cs" />
+    <Compile Include="Models\Meal.cs" />
     <Compile Include="Models\PersonalRecipe.cs" />
     <Compile Include="Models\Recipe.cs" />
     <Compile Include="Models\RecipeByMeal.cs" />

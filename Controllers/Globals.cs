@@ -155,6 +155,22 @@ namespace BloggerCookBook.Controllers
             return ingredientsByRecipeList;
         }
 
+        public static void CreateNewMeal(Meal meal, List<RecipeViewModel> listOfRecipes)
+        {
+            var database = new SQLiteDataService();
+            database.Initialize();
+            database.AddMeal(meal);
+            listOfRecipes.Select(recipe => new RecipeByMeal
+            {
+                RecipeId = recipe.GetRecipe().Id,
+                MealId = meal.Id,
+                CreatedDate = DateTime.Now,
+                CreatedBy = currentUser.Username
+            }).ToList().ForEach(rbm => {
+                database.AddRecipeByMeal(rbm);
+            });
+        }
+
         public static void FormatDisplayedData(DataGridView dataGridView)
         {
             bool showFill = true;
