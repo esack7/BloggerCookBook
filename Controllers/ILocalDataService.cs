@@ -26,5 +26,6 @@ namespace BloggerCookBook.Controllers
         void AddRecipeByMeal(RecipeByMeal recipeByMeal);
         List<Meal> GetAllCurrentUserMeals(int userId);
         void DeleteMeal(Meal meal);
+        List<Recipe> GetRecipesByMeal(int mealId);
     }
 }

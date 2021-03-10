@@ -17,20 +17,28 @@ namespace BloggerCookBook.Views
     {
         private BindingList<RecipeViewModel> mealRecipes = new BindingList<RecipeViewModel>();
         private bool exit = true;
+        private string[] typeList = new string[] { "Breakfast", "Brunch", "Lunch", "Dinner", "Snack", "Special Occasion" };
+        private Meal _meal;
         public AddEditMeal()
         {
             InitializeComponent();
             listOfRecipesDataGridView.DataSource = Globals.AllUsersRecipes;
             mealRecipesDataGridView.DataSource = mealRecipes;
-            typeComboBox.Items.AddRange(new object[]
-            {
-                "Breakfast",
-                "Brunch",
-                "Lunch",
-                "Dinner",
-                "Snack",
-                "Special Occasion"
-            });
+            typeComboBox.Items.AddRange(typeList);
+        }
+
+        public AddEditMeal(MealViewModel mealView)
+        {
+            InitializeComponent();
+            listOfRecipesDataGridView.DataSource = Globals.AllUsersRecipes;
+            mealRecipesDataGridView.DataSource = mealRecipes;
+            typeComboBox.Items.AddRange(typeList);
+            _meal = mealView.GetMeal();
+            Globals.GetMealRecipes(_meal.Id).ForEach(recipeView => mealRecipes.Add(recipeView));
+            titleTextBox.Text = _meal.Title;
+            typeComboBox.SelectedItem = _meal.Type;
+            dateTimePicker.Value = _meal.Date;
+            notesTextBox.Text = _meal.Notes;
         }
 
         private void addToMealButton_Click(object sender, EventArgs e)

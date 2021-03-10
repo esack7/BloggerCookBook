@@ -192,6 +192,15 @@ namespace BloggerCookBook.Controllers
             AllUsersMeals.Remove(mealView);
         }
 
+        public static List<RecipeViewModel> GetMealRecipes(int mealId)
+        {
+            var database = new SQLiteDataService();
+            database.Initialize();
+            var recipeByMealList = database.GetRecipesByMeal(mealId).Select(recipe => new RecipeViewModel(recipe)).ToList();
+            database.Close();
+            return recipeByMealList;
+        }
+
         public static void FormatDisplayedData(DataGridView dataGridView)
         {
             bool showFill = true;

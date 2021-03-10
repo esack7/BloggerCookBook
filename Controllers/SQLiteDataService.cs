@@ -121,5 +121,38 @@ namespace BloggerCookBook.Controllers
             database.Execute($"DELETE FROM RecipeByMeal where MealId={meal.Id}");
             database.Delete(meal);
         }
+
+        public List<Recipe> GetRecipesByMeal(int mealId)
+        {
+            var listOfRecipes = new List<Recipe>();
+            var recipes = database.Query<RecipeByMeal>($"SELECT RecipeId FROM RecipeByMeal WHERE MealId={mealId}")
+                .Select(rbm => rbm.RecipeId).ToArray();
+            var selectWhereStatement = new StringBuilder("WHERE Id in (");
+            for (int i = 0; i < recipes.Length; i++)
+            {
+                selectWhereStatement.Append(recipes[i]);
+                if(i < recipes.Length - 1)
+                {
+                    selectWhereStatement.Append(",");
+                }
+                else
+                {
+                    selectWhereStatement.Append(")");
+                }
+            }
+
+            var whereQuery = selectWhereStatement.ToString();
+            var personalRecipeQuery = $"SELECT * FROM PersonalRecipe {whereQuery}";
+            var webRecipeQuery = $"SELECT * FROM WebRecipe {whereQuery}";
+            var bookRecipeQuery = $"SELECT * FROM BookRecipe {whereQuery}";
+
+            database.Query<PersonalRecipe>(personalRecipeQuery)
+                .ForEach(recipe => listOfRecipes.Add(recipe));
+            database.Query<WebRecipe>(webRecipeQuery)
+                .ForEach(recipe => listOfRecipes.Add(recipe));
+            database.Query<BookRecipe>(bookRecipeQuery)
+                .ForEach(recipe => listOfRecipes.Add(recipe));
+            return listOfRecipes;
+        }
     }
 }

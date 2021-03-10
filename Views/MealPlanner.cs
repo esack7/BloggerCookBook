@@ -32,6 +32,12 @@ namespace BloggerCookBook.Views
             Navigation.NavigateTo(new AddEditMeal(), this);
         }
 
+        private void editButton_Click(object sender, EventArgs e)
+        {
+            var selectedMealView = (MealViewModel)mealsDataGridView.SelectedRows[0].DataBoundItem;
+            Navigation.NavigateTo(new AddEditMeal(selectedMealView), this);
+        }
+
         private void deleteButton_Click(object sender, EventArgs e)
         {
             var selectedMeal = (MealViewModel)mealsDataGridView.SelectedRows[0].DataBoundItem;
