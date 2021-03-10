@@ -14,6 +14,7 @@ namespace BloggerCookBook.Controllers
     public static class Globals
     {
         public static User currentUser;
+        public static BindingList<MealViewModel> AllUsersMeals;
         public static BindingList<RecipeViewModel> AllUsersRecipes;
         public static BindingList<IngredientViewModel> AllIngredients;
         
@@ -153,6 +154,76 @@ namespace BloggerCookBook.Controllers
             var ingredientsByRecipeList = database.GetIngredientsByRecipe(recipeId);
             database.Close();
             return ingredientsByRecipeList;
+        }
+
+        public static void CreateNewMeal(Meal meal, List<RecipeViewModel> listOfRecipes)
+        {
+            var database = new SQLiteDataService();
+            database.Initialize();
+            database.AddMeal(meal);
+            listOfRecipes.Select(recipe => new RecipeByMeal
+            {
+                RecipeId = recipe.GetRecipe().Id,
+                MealId = meal.Id,
+                CreatedDate = DateTime.Now,
+                CreatedBy = currentUser.Username
+            }).ToList().ForEach(rbm => {
+                database.AddRecipeByMeal(rbm);
+            });
+            database.Close();
+            AllUsersMeals.Add(new MealViewModel(meal));
+        }
+
+        public static List<MealViewModel> GetAllCurrentUserMeals()
+        {
+            var database = new SQLiteDataService();
+            database.Initialize();
+            var mealViewModels = database.GetAllCurrentUserMeals(currentUser.Id).Select(meal => new MealViewModel(meal)).ToList();
+            database.Close();
+            return mealViewModels;
+        }
+
+        public static void UpdateMeal(List<RecipeViewModel> mealRecipes, Meal updatedMeal, MealViewModel originalMealView)
+        {
+            var originalMeal = originalMealView.GetMeal();
+            var database = new SQLiteDataService();
+            database.Initialize();
+            database.UpdateMeal(updatedMeal);
+            database.DeleteRecipesByMeal(originalMeal.Id);
+            mealRecipes.Select(recipe => new RecipeByMeal
+            {
+                RecipeId = recipe.GetRecipe().Id,
+                MealId = originalMeal.Id,
+                CreatedDate = DateTime.Now,
+                CreatedBy = currentUser.Username
+            }).ToList().ForEach(rbm => {
+                database.AddRecipeByMeal(rbm);
+            });
+            database.Close();
+            var allUserMealsList = AllUsersMeals.ToList();
+            AllUsersMeals.Clear();
+            var index = allUserMealsList.IndexOf(originalMealView);
+            allUserMealsList.RemoveAt(index);
+            allUserMealsList.Insert(index, new MealViewModel(updatedMeal));
+            allUserMealsList.ForEach(mVM => AllUsersMeals.Add(mVM));
+        }
+
+        public static void DeleteMeal(MealViewModel mealView)
+        {
+            var database = new SQLiteDataService();
+            database.Initialize();
+            database.DeleteMeal(mealView.GetMeal());
+            database.Close();
+            AllUsersMeals.Remove(mealView);
+        }
+
+        public static List<RecipeViewModel> GetMealRecipes(int mealId)
+        {
+            var database = new SQLiteDataService();
+            database.Initialize();
+            var recipeByMealList = database.GetRecipesByMeal(mealId).Select(recipe => new RecipeViewModel(recipe)).ToList();
+            database.Close();
+            return recipeByMealList;
         }
 
         public static void FormatDisplayedData(DataGridView dataGridView)

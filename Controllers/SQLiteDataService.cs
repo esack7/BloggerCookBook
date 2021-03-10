@@ -26,6 +26,7 @@ namespace BloggerCookBook.Controllers
 
             results.Add(database.CreateTable<IngredientByRecipe>());
             results.Add(database.CreateTable<RecipeByMeal>());
+            results.Add(database.CreateTable<Meal>());
 
             foreach (var result in results)
             {
@@ -98,6 +99,71 @@ namespace BloggerCookBook.Controllers
         public void DeleteIngredientsByRecipe(int recipeId)
         {
             database.Execute($"DELETE FROM IngredientByRecipe where RecipeId={recipeId}");
+        }
+
+        public void AddMeal(Meal meal)
+        {
+            database.Insert(meal);
+        }
+
+        public void AddRecipeByMeal(RecipeByMeal recipeByMeal)
+        {
+            database.Insert(recipeByMeal);
+        }
+
+        public List<Meal> GetAllCurrentUserMeals(int userId)
+        {
+            return database.Query<Meal>($"SELECT * FROM Meal WHERE UserId={userId}");
+        }
+
+        public void UpdateMeal(Meal meal)
+        {
+            database.Update(meal);
+        }
+
+        public void DeleteMeal(Meal meal)
+        {
+            database.Execute($"DELETE FROM RecipeByMeal where MealId={meal.Id}");
+            database.Delete(meal);
+        }
+
+        public List<Recipe> GetRecipesByMeal(int mealId)
+        {
+            var listOfRecipes = new List<Recipe>();
+            var recipes = database.Query<RecipeByMeal>($"SELECT RecipeId FROM RecipeByMeal WHERE MealId={mealId}")
+                .Select(rbm => rbm.RecipeId).ToArray();
+            var selectWhereStatement = new StringBuilder("WHERE Id in (");
+            for (int i = 0; i < recipes.Length; i++)
+            {
+                selectWhereStatement.Append(recipes[i]);
+                if(i < recipes.Length - 1)
+                {
+                    selectWhereStatement.Append(",");
+                }
+                else
+                {
+                    selectWhereStatement.Append(")");
+                }
+            }
+
+            var whereQuery = selectWhereStatement.ToString();
+            var personalRecipeQuery = $"SELECT * FROM PersonalRecipe {whereQuery}";
+            var webRecipeQuery = $"SELECT * FROM WebRecipe {whereQuery}";
+            var bookRecipeQuery = $"SELECT * FROM BookRecipe {whereQuery}";
+
+            database.Query<PersonalRecipe>(personalRecipeQuery)
+                .ForEach(recipe => listOfRecipes.Add(recipe));
+            database.Query<WebRecipe>(webRecipeQuery)
+                .ForEach(recipe => listOfRecipes.Add(recipe));
+            database.Query<BookRecipe>(bookRecipeQuery)
+                .ForEach(recipe => listOfRecipes.Add(recipe));
+            return listOfRecipes;
+        }
+
+        public void DeleteRecipesByMeal(int mealId)
+        {
+            database.Execute($"DELETE FROM RecipeByMeal where MealId={mealId}");
+
         }
     }
 }

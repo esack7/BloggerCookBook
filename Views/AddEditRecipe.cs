@@ -19,36 +19,18 @@ namespace BloggerCookBook.Views
         private Recipe _recipe;
         private RecipeViewModel _recipeView;
         private bool exit = true;
+        private string[] categoryList = new string[] 
+        {
+            "Dressings & Sauces", "Appetizers", "Salads & Sandwiches", "Soups & Stews", "Vegetables", "Rice, Grains, & Beans",
+            "Pasta", "Eggs & Breakfast", "Meat", "Slow Cooker/Pressure Cooker", "Bread & Pizza", "Quick Breads & Muffins", "Cookies",
+            "Brownies & Bars", "Cake", "Pie", "Fruit Desserts", "Drinks", "Preserving", "Freezer Meals", "Food Storage", "Kids in the Kitchen"
+        };
         public AddEditRecipe()
         {
             InitializeComponent();
             listOfIngredientsDataGridView.DataSource = Globals.AllIngredients;
             recipeIngredientsDataGridView.DataSource = IngredientsInRecipeView;
-            categoryComboBox.Items.AddRange(new object[]
-            {
-                "Dressings & Sauces",
-                "Appetizers",
-                "Salads & Sandwiches",
-                "Soups & Stews",
-                "Vegetables",
-                "Rice, Grains, & Beans",
-                "Pasta",
-                "Eggs & Breakfast",
-                "Meat",
-                "Slow Cooker/Pressure Cooker",
-                "Bread & Pizza",
-                "Quick Breads & Muffins",
-                "Cookies",
-                "Brownies & Bars",
-                "Cake",
-                "Pie",
-                "Fruit Desserts",
-                "Drinks",
-                "Preserving",
-                "Freezer Meals",
-                "Food Storage",
-                "Kids in the Kitchen"
-            });
+            categoryComboBox.Items.AddRange(categoryList);
         }
 
         public AddEditRecipe(RecipeViewModel recipeView)
@@ -59,31 +41,7 @@ namespace BloggerCookBook.Views
             listOfIngredientsDataGridView.DataSource = Globals.AllIngredients;
             recipeIngredientsDataGridView.DataSource = IngredientsInRecipeView;
             Globals.GetIngredientsInRecipe(_recipe.Id).ForEach(ibr => IngredientsInRecipeView.Add(new IngredientByRecipeViewModel(ibr)));
-            categoryComboBox.Items.AddRange(new object[]
-            {
-                "Dressings & Sauces",
-                "Appetizers",
-                "Salads & Sandwiches",
-                "Soups & Stews",
-                "Vegetables",
-                "Rice, Grains, & Beans",
-                "Pasta",
-                "Eggs & Breakfast",
-                "Meat",
-                "Slow Cooker/Pressure Cooker",
-                "Bread & Pizza",
-                "Quick Breads & Muffins",
-                "Cookies",
-                "Brownies & Bars",
-                "Cake",
-                "Pie",
-                "Fruit Desserts",
-                "Drinks",
-                "Preserving",
-                "Freezer Meals",
-                "Food Storage",
-                "Kids in the Kitchen"
-            });
+            categoryComboBox.Items.AddRange(categoryList);
             titleTextBox.Text = _recipe.Title;
             categoryComboBox.SelectedItem = _recipe.Category;
             instructionsTextBox.Text = _recipe.Instructions;
