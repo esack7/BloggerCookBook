@@ -18,7 +18,8 @@ namespace BloggerCookBook.Views
         private BindingList<RecipeViewModel> mealRecipes = new BindingList<RecipeViewModel>();
         private bool exit = true;
         private string[] typeList = new string[] { "Breakfast", "Brunch", "Lunch", "Dinner", "Snack", "Special Occasion" };
-        private Meal _meal;
+        private MealViewModel _mealView;
+
         public AddEditMeal()
         {
             InitializeComponent();
@@ -33,12 +34,13 @@ namespace BloggerCookBook.Views
             listOfRecipesDataGridView.DataSource = Globals.AllUsersRecipes;
             mealRecipesDataGridView.DataSource = mealRecipes;
             typeComboBox.Items.AddRange(typeList);
-            _meal = mealView.GetMeal();
-            Globals.GetMealRecipes(_meal.Id).ForEach(recipeView => mealRecipes.Add(recipeView));
-            titleTextBox.Text = _meal.Title;
-            typeComboBox.SelectedItem = _meal.Type;
-            dateTimePicker.Value = _meal.Date;
-            notesTextBox.Text = _meal.Notes;
+            _mealView = mealView;
+            var meal = mealView.GetMeal();
+            Globals.GetMealRecipes(meal.Id).ForEach(recipeView => mealRecipes.Add(recipeView));
+            titleTextBox.Text = meal.Title;
+            typeComboBox.SelectedItem = meal.Type;
+            dateTimePicker.Value = meal.Date;
+            notesTextBox.Text = meal.Notes;
         }
 
         private void addToMealButton_Click(object sender, EventArgs e)
@@ -60,17 +62,31 @@ namespace BloggerCookBook.Views
         private void saveButton_Click(object sender, EventArgs e)
         {
             exit = false;
-            var meal = new Meal
+            if(_mealView is null)
             {
-                UserId = Globals.currentUser.Id,
-                Title = titleTextBox.Text,
-                Type = typeComboBox.SelectedItem.ToString(),
-                Date = dateTimePicker.Value,
-                Notes = notesTextBox.Text,
-                CreatedDate = DateTime.Now,
-                CreatedBy = Globals.currentUser.Username
-            };
-            Globals.CreateNewMeal(meal, mealRecipes.ToList());
+                var meal = new Meal
+                {
+                    UserId = Globals.currentUser.Id,
+                    Title = titleTextBox.Text,
+                    Type = typeComboBox.SelectedItem.ToString(),
+                    Date = dateTimePicker.Value,
+                    Notes = notesTextBox.Text,
+                    CreatedDate = DateTime.Now,
+                    CreatedBy = Globals.currentUser.Username
+                };
+                Globals.CreateNewMeal(meal, mealRecipes.ToList());
+            }
+            else
+            {
+                var updatedMeal = _mealView.GetMeal();
+                updatedMeal.Title = titleTextBox.Text;
+                updatedMeal.Type = typeComboBox.SelectedItem.ToString();
+                updatedMeal.Date = dateTimePicker.Value;
+                updatedMeal.Notes = notesTextBox.Text;
+                updatedMeal.ModifiedDate = DateTime.Now;
+                updatedMeal.ModifiedBy = Globals.currentUser.Username;
+                Globals.UpdateMeal(mealRecipes.ToList(), updatedMeal, _mealView);
+            }
             Navigation.NavigateBack(this);
         }
 

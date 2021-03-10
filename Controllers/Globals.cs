@@ -183,6 +183,31 @@ namespace BloggerCookBook.Controllers
             return mealViewModels;
         }
 
+        public static void UpdateMeal(List<RecipeViewModel> mealRecipes, Meal updatedMeal, MealViewModel originalMealView)
+        {
+            var originalMeal = originalMealView.GetMeal();
+            var database = new SQLiteDataService();
+            database.Initialize();
+            database.UpdateMeal(updatedMeal);
+            database.DeleteRecipesByMeal(originalMeal.Id);
+            mealRecipes.Select(recipe => new RecipeByMeal
+            {
+                RecipeId = recipe.GetRecipe().Id,
+                MealId = originalMeal.Id,
+                CreatedDate = DateTime.Now,
+                CreatedBy = currentUser.Username
+            }).ToList().ForEach(rbm => {
+                database.AddRecipeByMeal(rbm);
+            });
+            database.Close();
+            var allUserMealsList = AllUsersMeals.ToList();
+            AllUsersMeals.Clear();
+            var index = allUserMealsList.IndexOf(originalMealView);
+            allUserMealsList.RemoveAt(index);
+            allUserMealsList.Insert(index, new MealViewModel(updatedMeal));
+            allUserMealsList.ForEach(mVM => AllUsersMeals.Add(mVM));
+        }
+
         public static void DeleteMeal(MealViewModel mealView)
         {
             var database = new SQLiteDataService();

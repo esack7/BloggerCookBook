@@ -116,6 +116,11 @@ namespace BloggerCookBook.Controllers
             return database.Query<Meal>($"SELECT * FROM Meal WHERE UserId={userId}");
         }
 
+        public void UpdateMeal(Meal meal)
+        {
+            database.Update(meal);
+        }
+
         public void DeleteMeal(Meal meal)
         {
             database.Execute($"DELETE FROM RecipeByMeal where MealId={meal.Id}");
@@ -153,6 +158,12 @@ namespace BloggerCookBook.Controllers
             database.Query<BookRecipe>(bookRecipeQuery)
                 .ForEach(recipe => listOfRecipes.Add(recipe));
             return listOfRecipes;
+        }
+
+        public void DeleteRecipesByMeal(int mealId)
+        {
+            database.Execute($"DELETE FROM RecipeByMeal where MealId={mealId}");
+
         }
     }
 }
