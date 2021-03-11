@@ -76,6 +76,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controllers\DateFormatter.cs" />
     <Compile Include="Controllers\Globals.cs" />
     <Compile Include="Controllers\ILocalDataService.cs" />
     <Compile Include="Controllers\Navigation.cs" />
