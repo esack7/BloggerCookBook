@@ -24,6 +24,16 @@ namespace BloggerCookBook.Views
             SelectedDate = DateTime.Now;
             mealsDataGridView.DataSource = MealsList;
             Globals.AllUsersMeals.ToList().ForEach(meal => MealsList.Add(meal));
+            dayRadioButton.Checked = true;
+        }
+
+        public void refreshForm()
+        {
+            SelectedDate = DateTime.Now;
+            MealsList.Clear();
+            Globals.AllUsersMeals.ToList().ForEach(meal => MealsList.Add(meal));
+            dayRadioButton.Checked = true;
+            updateMealsList(new DateFormatter(SelectedDate));
         }
 
         private void mainMenuButton_Click(object sender, EventArgs e)
