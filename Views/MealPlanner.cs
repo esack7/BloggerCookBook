@@ -63,8 +63,25 @@ namespace BloggerCookBook.Views
             mealsDataGridView.MultiSelect = false;
         }
 
-        private void updateMealsList(DateTime start, DateTime end)
+        private void updateMealsList(DateFormatter dateFormatter)
         {
+            DateTime start;
+            DateTime end;
+            if (dayRadioButton.Checked)
+            {
+                start = dateFormatter.DayBeginning();
+                end = dateFormatter.DayEnding();
+            } 
+            else if (weekRadioButton.Checked)
+            {
+                start = dateFormatter.WeekBeginning();
+                end = dateFormatter.WeekEnding();
+            } 
+            else
+            {
+                start = dateFormatter.MonthBeginning();
+                end = dateFormatter.MonthEnding();
+            }
             MealsList.Clear();
             Globals.AllUsersMeals
                 .Where(mealView => mealView.GetMeal().Date >= start && mealView.GetMeal().Date <= end).ToList()
@@ -73,26 +90,23 @@ namespace BloggerCookBook.Views
 
         private void dayRadioButton_CheckedChanged(object sender, EventArgs e)
         {
-            var range = new DateFormatter(SelectedDate);
-            updateMealsList(range.DayBeginning(), range.DayEnding());
-
+            updateMealsList(new DateFormatter(SelectedDate));
         }
 
         private void weekRadioButton_CheckedChanged(object sender, EventArgs e)
         {
-            var range = new DateFormatter(SelectedDate);
-            updateMealsList(range.WeekBeginning(), range.WeekEnding());
+            updateMealsList(new DateFormatter(SelectedDate));
         }
 
         private void monthRadioButton_CheckedChanged(object sender, EventArgs e)
         {
-            var range = new DateFormatter(SelectedDate);
-            updateMealsList(range.MonthBeginning(), range.MonthEnding());
+            updateMealsList(new DateFormatter(SelectedDate));
         }
 
         private void mealPlannerCalendar_DateSelected(object sender, DateRangeEventArgs e)
         {
-
+            SelectedDate = mealPlannerCalendar.SelectionStart;
+            updateMealsList(new DateFormatter(SelectedDate));
         }
     }
 }
