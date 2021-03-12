@@ -7,6 +7,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -15,10 +16,24 @@ namespace BloggerCookBook.Views
     public partial class MealPlanner : Form
     {
         private bool exit = true;
+        private DateTime SelectedDate;
+        private BindingList<MealViewModel> MealsList = new BindingList<MealViewModel>();
         public MealPlanner()
         {
             InitializeComponent();
-            mealsDataGridView.DataSource = Globals.AllUsersMeals;
+            SelectedDate = DateTime.Now;
+            mealsDataGridView.DataSource = MealsList;
+            Globals.AllUsersMeals.ToList().ForEach(meal => MealsList.Add(meal));
+            dayRadioButton.Checked = true;
+        }
+
+        public void refreshForm()
+        {
+            SelectedDate = DateTime.Now;
+            MealsList.Clear();
+            Globals.AllUsersMeals.ToList().ForEach(meal => MealsList.Add(meal));
+            dayRadioButton.Checked = true;
+            updateMealsList(new DateFormatter(SelectedDate));
         }
 
         private void mainMenuButton_Click(object sender, EventArgs e)
@@ -56,6 +71,52 @@ namespace BloggerCookBook.Views
         {
             Globals.FormatDisplayedData(mealsDataGridView);
             mealsDataGridView.MultiSelect = false;
+        }
+
+        private void updateMealsList(DateFormatter dateFormatter)
+        {
+            DateTime start;
+            DateTime end;
+            if (dayRadioButton.Checked)
+            {
+                start = dateFormatter.DayBeginning();
+                end = dateFormatter.DayEnding();
+            } 
+            else if (weekRadioButton.Checked)
+            {
+                start = dateFormatter.WeekBeginning();
+                end = dateFormatter.WeekEnding();
+            } 
+            else
+            {
+                start = dateFormatter.MonthBeginning();
+                end = dateFormatter.MonthEnding();
+            }
+            MealsList.Clear();
+            Globals.AllUsersMeals
+                .Where(mealView => mealView.GetMeal().Date >= start && mealView.GetMeal().Date <= end).ToList()
+                .ForEach(mealView => MealsList.Add(mealView));
+        }
+
+        private void dayRadioButton_CheckedChanged(object sender, EventArgs e)
+        {
+            updateMealsList(new DateFormatter(SelectedDate));
+        }
+
+        private void weekRadioButton_CheckedChanged(object sender, EventArgs e)
+        {
+            updateMealsList(new DateFormatter(SelectedDate));
+        }
+
+        private void monthRadioButton_CheckedChanged(object sender, EventArgs e)
+        {
+            updateMealsList(new DateFormatter(SelectedDate));
+        }
+
+        private void mealPlannerCalendar_DateSelected(object sender, DateRangeEventArgs e)
+        {
+            SelectedDate = mealPlannerCalendar.SelectionStart;
+            updateMealsList(new DateFormatter(SelectedDate));
         }
     }
 }

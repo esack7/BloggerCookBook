@@ -87,6 +87,8 @@ namespace BloggerCookBook.Views
                 updatedMeal.ModifiedBy = Globals.currentUser.Username;
                 Globals.UpdateMeal(mealRecipes.ToList(), updatedMeal, _mealView);
             }
+            var mealPlannerForm = (MealPlanner)Navigation.PeekCurrentForm();
+            mealPlannerForm.refreshForm();
             Navigation.NavigateBack(this);
         }
 

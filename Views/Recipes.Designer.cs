@@ -143,6 +143,7 @@ namespace BloggerCookBook.Views
             this.categoryComboBox.Name = "categoryComboBox";
             this.categoryComboBox.Size = new System.Drawing.Size(206, 29);
             this.categoryComboBox.TabIndex = 13;
+            this.categoryComboBox.SelectedValueChanged += new System.EventHandler(this.categoryComboBox_SelectedValueChanged);
             // 
             // mainMenuButton
             // 
