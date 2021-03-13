@@ -47,9 +47,8 @@ namespace BloggerCookBook.Views
             this.label1.Dock = System.Windows.Forms.DockStyle.Top;
             this.label1.Font = new System.Drawing.Font("Segoe UI", 22F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.Location = new System.Drawing.Point(0, 0);
-            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(600, 50);
+            this.label1.Size = new System.Drawing.Size(800, 62);
             this.label1.TabIndex = 2;
             this.label1.Text = "Recipes";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -57,22 +56,22 @@ namespace BloggerCookBook.Views
             // recipesDataGridView
             // 
             this.recipesDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.recipesDataGridView.Location = new System.Drawing.Point(9, 53);
-            this.recipesDataGridView.Margin = new System.Windows.Forms.Padding(2);
+            this.recipesDataGridView.Location = new System.Drawing.Point(12, 65);
+            this.recipesDataGridView.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.recipesDataGridView.Name = "recipesDataGridView";
             this.recipesDataGridView.RowHeadersWidth = 51;
             this.recipesDataGridView.RowTemplate.Height = 24;
-            this.recipesDataGridView.Size = new System.Drawing.Size(247, 303);
+            this.recipesDataGridView.Size = new System.Drawing.Size(329, 373);
             this.recipesDataGridView.TabIndex = 3;
             this.recipesDataGridView.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.recipesDataGridView_DataBindingComplete);
             // 
             // addButton
             // 
             this.addButton.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.addButton.Location = new System.Drawing.Point(266, 271);
-            this.addButton.Margin = new System.Windows.Forms.Padding(2);
+            this.addButton.Location = new System.Drawing.Point(355, 334);
+            this.addButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.addButton.Name = "addButton";
-            this.addButton.Size = new System.Drawing.Size(96, 40);
+            this.addButton.Size = new System.Drawing.Size(128, 49);
             this.addButton.TabIndex = 7;
             this.addButton.Text = "Add";
             this.addButton.UseVisualStyleBackColor = true;
@@ -81,10 +80,10 @@ namespace BloggerCookBook.Views
             // editButton
             // 
             this.editButton.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.editButton.Location = new System.Drawing.Point(379, 271);
-            this.editButton.Margin = new System.Windows.Forms.Padding(2);
+            this.editButton.Location = new System.Drawing.Point(505, 334);
+            this.editButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.editButton.Name = "editButton";
-            this.editButton.Size = new System.Drawing.Size(96, 40);
+            this.editButton.Size = new System.Drawing.Size(128, 49);
             this.editButton.TabIndex = 8;
             this.editButton.Text = "Edit";
             this.editButton.UseVisualStyleBackColor = true;
@@ -93,10 +92,10 @@ namespace BloggerCookBook.Views
             // deleteButton
             // 
             this.deleteButton.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.deleteButton.Location = new System.Drawing.Point(494, 271);
-            this.deleteButton.Margin = new System.Windows.Forms.Padding(2);
+            this.deleteButton.Location = new System.Drawing.Point(659, 334);
+            this.deleteButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.deleteButton.Name = "deleteButton";
-            this.deleteButton.Size = new System.Drawing.Size(96, 40);
+            this.deleteButton.Size = new System.Drawing.Size(128, 49);
             this.deleteButton.TabIndex = 9;
             this.deleteButton.Text = "Delete";
             this.deleteButton.UseVisualStyleBackColor = true;
@@ -105,19 +104,19 @@ namespace BloggerCookBook.Views
             // searchTextBox
             // 
             this.searchTextBox.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.searchTextBox.Location = new System.Drawing.Point(268, 53);
-            this.searchTextBox.Margin = new System.Windows.Forms.Padding(2);
+            this.searchTextBox.Location = new System.Drawing.Point(357, 65);
+            this.searchTextBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.searchTextBox.Name = "searchTextBox";
-            this.searchTextBox.Size = new System.Drawing.Size(179, 29);
+            this.searchTextBox.Size = new System.Drawing.Size(237, 34);
             this.searchTextBox.TabIndex = 10;
             // 
             // searchButton
             // 
             this.searchButton.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.searchButton.Location = new System.Drawing.Point(481, 47);
-            this.searchButton.Margin = new System.Windows.Forms.Padding(2);
+            this.searchButton.Location = new System.Drawing.Point(641, 58);
+            this.searchButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.searchButton.Name = "searchButton";
-            this.searchButton.Size = new System.Drawing.Size(96, 40);
+            this.searchButton.Size = new System.Drawing.Size(128, 49);
             this.searchButton.TabIndex = 11;
             this.searchButton.Text = "Search";
             this.searchButton.UseVisualStyleBackColor = true;
@@ -127,31 +126,31 @@ namespace BloggerCookBook.Views
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(263, 107);
-            this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label2.Location = new System.Drawing.Point(351, 132);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(88, 25);
+            this.label2.Size = new System.Drawing.Size(111, 32);
             this.label2.TabIndex = 12;
             this.label2.Text = "Category";
             // 
             // categoryComboBox
             // 
+            this.categoryComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.categoryComboBox.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.categoryComboBox.FormattingEnabled = true;
-            this.categoryComboBox.Location = new System.Drawing.Point(371, 106);
-            this.categoryComboBox.Margin = new System.Windows.Forms.Padding(2);
+            this.categoryComboBox.Location = new System.Drawing.Point(495, 130);
+            this.categoryComboBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.categoryComboBox.Name = "categoryComboBox";
-            this.categoryComboBox.Size = new System.Drawing.Size(206, 29);
+            this.categoryComboBox.Size = new System.Drawing.Size(273, 36);
             this.categoryComboBox.TabIndex = 13;
             this.categoryComboBox.SelectedValueChanged += new System.EventHandler(this.categoryComboBox_SelectedValueChanged);
             // 
             // mainMenuButton
             // 
             this.mainMenuButton.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.mainMenuButton.Location = new System.Drawing.Point(268, 316);
-            this.mainMenuButton.Margin = new System.Windows.Forms.Padding(2);
+            this.mainMenuButton.Location = new System.Drawing.Point(357, 389);
+            this.mainMenuButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.mainMenuButton.Name = "mainMenuButton";
-            this.mainMenuButton.Size = new System.Drawing.Size(322, 40);
+            this.mainMenuButton.Size = new System.Drawing.Size(429, 49);
             this.mainMenuButton.TabIndex = 14;
             this.mainMenuButton.Text = "Main Menu";
             this.mainMenuButton.UseVisualStyleBackColor = true;
@@ -159,9 +158,9 @@ namespace BloggerCookBook.Views
             // 
             // Recipes
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(600, 366);
+            this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.mainMenuButton);
             this.Controls.Add(this.categoryComboBox);
             this.Controls.Add(this.label2);
@@ -172,7 +171,7 @@ namespace BloggerCookBook.Views
             this.Controls.Add(this.addButton);
             this.Controls.Add(this.recipesDataGridView);
             this.Controls.Add(this.label1);
-            this.Margin = new System.Windows.Forms.Padding(2);
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "Recipes";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Recipes";

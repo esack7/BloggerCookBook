@@ -98,6 +98,7 @@ namespace BloggerCookBook.Views
             // 
             // unitComboBox
             // 
+            this.unitComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.unitComboBox.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.unitComboBox.FormattingEnabled = true;
             this.unitComboBox.Location = new System.Drawing.Point(331, 194);

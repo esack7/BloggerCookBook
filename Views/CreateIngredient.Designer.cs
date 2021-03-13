@@ -40,12 +40,13 @@ namespace BloggerCookBook.Views
             // 
             // measurementComboBox
             // 
+            this.measurementComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.measurementComboBox.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.measurementComboBox.FormattingEnabled = true;
-            this.measurementComboBox.Location = new System.Drawing.Point(262, 176);
-            this.measurementComboBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.measurementComboBox.Location = new System.Drawing.Point(349, 217);
+            this.measurementComboBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.measurementComboBox.Name = "measurementComboBox";
-            this.measurementComboBox.Size = new System.Drawing.Size(235, 29);
+            this.measurementComboBox.Size = new System.Drawing.Size(312, 36);
             this.measurementComboBox.TabIndex = 38;
             // 
             // measurementLabel
@@ -53,20 +54,19 @@ namespace BloggerCookBook.Views
             this.measurementLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.measurementLabel.AutoSize = true;
             this.measurementLabel.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.measurementLabel.Location = new System.Drawing.Point(88, 176);
-            this.measurementLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.measurementLabel.Location = new System.Drawing.Point(117, 217);
             this.measurementLabel.Name = "measurementLabel";
-            this.measurementLabel.Size = new System.Drawing.Size(172, 25);
+            this.measurementLabel.Size = new System.Drawing.Size(221, 32);
             this.measurementLabel.TabIndex = 37;
             this.measurementLabel.Text = "Measurement Type";
             // 
             // saveButton
             // 
             this.saveButton.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.saveButton.Location = new System.Drawing.Point(190, 303);
-            this.saveButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.saveButton.Location = new System.Drawing.Point(253, 373);
+            this.saveButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.saveButton.Name = "saveButton";
-            this.saveButton.Size = new System.Drawing.Size(96, 40);
+            this.saveButton.Size = new System.Drawing.Size(128, 49);
             this.saveButton.TabIndex = 36;
             this.saveButton.Text = "Save";
             this.saveButton.UseVisualStyleBackColor = true;
@@ -75,10 +75,10 @@ namespace BloggerCookBook.Views
             // cancelButton
             // 
             this.cancelButton.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cancelButton.Location = new System.Drawing.Point(312, 303);
-            this.cancelButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.cancelButton.Location = new System.Drawing.Point(416, 373);
+            this.cancelButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.cancelButton.Name = "cancelButton";
-            this.cancelButton.Size = new System.Drawing.Size(96, 40);
+            this.cancelButton.Size = new System.Drawing.Size(128, 49);
             this.cancelButton.TabIndex = 35;
             this.cancelButton.Text = "Cancel";
             this.cancelButton.UseVisualStyleBackColor = true;
@@ -89,20 +89,19 @@ namespace BloggerCookBook.Views
             this.nameLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.nameLabel.AutoSize = true;
             this.nameLabel.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.nameLabel.Location = new System.Drawing.Point(107, 111);
-            this.nameLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.nameLabel.Location = new System.Drawing.Point(143, 137);
             this.nameLabel.Name = "nameLabel";
-            this.nameLabel.Size = new System.Drawing.Size(154, 25);
+            this.nameLabel.Size = new System.Drawing.Size(196, 32);
             this.nameLabel.TabIndex = 34;
             this.nameLabel.Text = "Ingredient Name";
             // 
             // nameTextBox
             // 
             this.nameTextBox.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.nameTextBox.Location = new System.Drawing.Point(262, 110);
-            this.nameTextBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.nameTextBox.Location = new System.Drawing.Point(349, 135);
+            this.nameTextBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.nameTextBox.Name = "nameTextBox";
-            this.nameTextBox.Size = new System.Drawing.Size(235, 29);
+            this.nameTextBox.Size = new System.Drawing.Size(312, 34);
             this.nameTextBox.TabIndex = 33;
             // 
             // createIngredientLabel
@@ -110,18 +109,17 @@ namespace BloggerCookBook.Views
             this.createIngredientLabel.Dock = System.Windows.Forms.DockStyle.Top;
             this.createIngredientLabel.Font = new System.Drawing.Font("Segoe UI", 22F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.createIngredientLabel.Location = new System.Drawing.Point(0, 0);
-            this.createIngredientLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.createIngredientLabel.Name = "createIngredientLabel";
-            this.createIngredientLabel.Size = new System.Drawing.Size(600, 50);
+            this.createIngredientLabel.Size = new System.Drawing.Size(800, 62);
             this.createIngredientLabel.TabIndex = 32;
             this.createIngredientLabel.Text = "Create Ingredient";
             this.createIngredientLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // CreateIngredient
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(600, 366);
+            this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.measurementComboBox);
             this.Controls.Add(this.measurementLabel);
             this.Controls.Add(this.saveButton);
@@ -129,7 +127,7 @@ namespace BloggerCookBook.Views
             this.Controls.Add(this.nameLabel);
             this.Controls.Add(this.nameTextBox);
             this.Controls.Add(this.createIngredientLabel);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "CreateIngredient";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "CreateIngredient";
