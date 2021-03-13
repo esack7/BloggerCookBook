@@ -1,4 +1,5 @@
 ﻿using BloggerCookBook.Controllers;
+using BloggerCookBook.Exemptions;
 using BloggerCookBook.Models;
 using BloggerCookBook.ViewModels;
 using System;
@@ -73,105 +74,144 @@ namespace BloggerCookBook.Views
 
         private void saveButton_Click(object sender, EventArgs e)
         {
-            exit = false;
-            bool editing = true;
-            if(_recipe is null)
+            try
             {
-                editing = false;
-            }
-            var ingredientsByRecipeList = IngredientsInRecipeView.Select(iir => iir.GetIngredientByRecipe()).ToList();
-            if(personalTypeRadioButton.Checked)
-            {
-                if(editing)
+                if(titleTextBox.Text == "")
                 {
-                    var _precipe = (PersonalRecipe)_recipe;
-                    _precipe.Title = titleTextBox.Text;
-                    _precipe.Category = categoryComboBox.SelectedItem.ToString();
-                    _precipe.Instructions = instructionsTextBox.Text;
-                    _precipe.ModifiedBy = Globals.currentUser.Username;
-                    _precipe.ModifiedDate = DateTime.Now;
-                    _precipe.Secret = secretCheckBox.Checked;
-                    _recipe = _precipe;
+                    throw new InputExemption("You must supply a title.");
+                }
+                if(categoryComboBox.SelectedItem == null)
+                {
+                    throw new InputExemption("You must select a category.");
+                }
+                if (IngredientsInRecipeView.Count < 1)
+                {
+                    throw new InputExemption("You must add at least one ingredient to a recipe.");
+                }
+                if (!personalTypeRadioButton.Checked && !webTypeRadioButton.Checked && !bookTypeRadioButton.Checked)
+                {
+                    throw new InputExemption("You must select a recipe type.");
+                }
+                if(webTypeRadioButton.Checked && typeATextBox.Text == "")
+                {
+                    throw new InputExemption("A web recipe requires a URL.");
+                }
+                if(bookTypeRadioButton.Checked && typeATextBox.Text == "")
+                {
+                    throw new InputExemption("A book recipe requires a book title.");
+                }
+                if (bookTypeRadioButton.Checked && typeBTextBox.Text == "")
+                {
+                    throw new InputExemption("A book recipe requires an author.");
+                }
+                if(instructionsTextBox.Text == "")
+                {
+                    throw new InputExemption("A recipe requires instructions.");
+                }
+                exit = false;
+                bool editing = true;
+                if (_recipe is null)
+                {
+                    editing = false;
+                }
+                var ingredientsByRecipeList = IngredientsInRecipeView.Select(iir => iir.GetIngredientByRecipe()).ToList();
+                if (personalTypeRadioButton.Checked)
+                {
+                    if (editing)
+                    {
+                        var _precipe = (PersonalRecipe)_recipe;
+                        _precipe.Title = titleTextBox.Text;
+                        _precipe.Category = categoryComboBox.SelectedItem.ToString();
+                        _precipe.Instructions = instructionsTextBox.Text;
+                        _precipe.ModifiedBy = Globals.currentUser.Username;
+                        _precipe.ModifiedDate = DateTime.Now;
+                        _precipe.Secret = secretCheckBox.Checked;
+                        _recipe = _precipe;
+                    }
+                    else
+                    {
+                        _recipe = new PersonalRecipe
+                        {
+                            UserId = Globals.currentUser.Id,
+                            Title = titleTextBox.Text,
+                            Category = categoryComboBox.SelectedItem.ToString(),
+                            Instructions = instructionsTextBox.Text,
+                            CreatedBy = Globals.currentUser.Username,
+                            CreatedDate = DateTime.Now,
+                            Secret = secretCheckBox.Checked
+                        };
+                    }
+                }
+                else if (webTypeRadioButton.Checked)
+                {
+                    if (editing)
+                    {
+                        var _wrecipe = (WebRecipe)_recipe;
+                        _wrecipe.Title = titleTextBox.Text;
+                        _wrecipe.Category = categoryComboBox.SelectedItem.ToString();
+                        _wrecipe.Instructions = instructionsTextBox.Text;
+                        _wrecipe.ModifiedBy = Globals.currentUser.Username;
+                        _wrecipe.ModifiedDate = DateTime.Now;
+                        _wrecipe.Url = typeATextBox.Text;
+                        _recipe = _wrecipe;
+                    }
+                    else
+                    {
+                        _recipe = new WebRecipe
+                        {
+                            UserId = Globals.currentUser.Id,
+                            Title = titleTextBox.Text,
+                            Category = categoryComboBox.SelectedItem.ToString(),
+                            Instructions = instructionsTextBox.Text,
+                            CreatedBy = Globals.currentUser.Username,
+                            CreatedDate = DateTime.Now,
+                            Url = typeATextBox.Text
+                        };
+                    }
                 }
                 else
                 {
-                    _recipe = new PersonalRecipe
+                    if (editing)
                     {
-                        UserId = Globals.currentUser.Id,
-                        Title = titleTextBox.Text,
-                        Category = categoryComboBox.SelectedItem.ToString(),
-                        Instructions = instructionsTextBox.Text,
-                        CreatedBy = Globals.currentUser.Username,
-                        CreatedDate = DateTime.Now,
-                        Secret = secretCheckBox.Checked
-                    };
+                        var _brecipe = (BookRecipe)_recipe;
+                        _brecipe.Title = titleTextBox.Text;
+                        _brecipe.Category = categoryComboBox.SelectedItem.ToString();
+                        _brecipe.Instructions = instructionsTextBox.Text;
+                        _brecipe.ModifiedBy = Globals.currentUser.Username;
+                        _brecipe.ModifiedDate = DateTime.Now;
+                        _brecipe.BookTitle = typeATextBox.Text;
+                        _brecipe.BookAuthor = typeBTextBox.Text;
+                        _recipe = _brecipe;
+                    }
+                    else
+                    {
+                        _recipe = new BookRecipe
+                        {
+                            UserId = Globals.currentUser.Id,
+                            Title = titleTextBox.Text,
+                            Category = categoryComboBox.SelectedItem.ToString(),
+                            Instructions = instructionsTextBox.Text,
+                            CreatedBy = Globals.currentUser.Username,
+                            CreatedDate = DateTime.Now,
+                            BookTitle = typeATextBox.Text,
+                            BookAuthor = typeBTextBox.Text
+                        };
+                    }
                 }
-            } 
-            else if (webTypeRadioButton.Checked)
-            {
-                if(editing)
+                if (editing)
                 {
-                    var _wrecipe = (WebRecipe)_recipe;
-                    _wrecipe.Title = titleTextBox.Text;
-                    _wrecipe.Category = categoryComboBox.SelectedItem.ToString();
-                    _wrecipe.Instructions = instructionsTextBox.Text;
-                    _wrecipe.ModifiedBy = Globals.currentUser.Username;
-                    _wrecipe.ModifiedDate = DateTime.Now;
-                    _wrecipe.Url = typeATextBox.Text;
-                    _recipe = _wrecipe;
+                    Globals.UpdateRecipe(ingredientsByRecipeList, _recipe, _recipeView);
+                    Navigation.NavigateBack(this);
                 }
                 else
                 {
-                    _recipe = new WebRecipe
-                    {
-                        UserId = Globals.currentUser.Id,
-                        Title = titleTextBox.Text,
-                        Category = categoryComboBox.SelectedItem.ToString(),
-                        Instructions = instructionsTextBox.Text,
-                        CreatedBy = Globals.currentUser.Username,
-                        CreatedDate = DateTime.Now,
-                        Url = typeATextBox.Text
-                    };
+                    Globals.CreateNewRecipe(ingredientsByRecipeList, _recipe);
+                    Navigation.NavigateBack(this);
                 }
             }
-            else
+            catch (InputExemption error)
             {
-                if(editing)
-                {
-                    var _brecipe = (BookRecipe)_recipe;
-                    _brecipe.Title = titleTextBox.Text;
-                    _brecipe.Category = categoryComboBox.SelectedItem.ToString();
-                    _brecipe.Instructions = instructionsTextBox.Text;
-                    _brecipe.ModifiedBy = Globals.currentUser.Username;
-                    _brecipe.ModifiedDate = DateTime.Now;
-                    _brecipe.BookTitle = typeATextBox.Text;
-                    _brecipe.BookAuthor = typeBTextBox.Text;
-                    _recipe = _brecipe;
-                }
-                else
-                {
-                    _recipe = new BookRecipe
-                    {
-                        UserId = Globals.currentUser.Id,
-                        Title = titleTextBox.Text,
-                        Category = categoryComboBox.SelectedItem.ToString(),
-                        Instructions = instructionsTextBox.Text,
-                        CreatedBy = Globals.currentUser.Username,
-                        CreatedDate = DateTime.Now,
-                        BookTitle = typeATextBox.Text,
-                        BookAuthor = typeBTextBox.Text
-                    };
-                }
-            }
-            if(editing)
-            {
-                Globals.UpdateRecipe(ingredientsByRecipeList, _recipe, _recipeView);
-                Navigation.NavigateBack(this);
-            } 
-            else
-            {
-                Globals.CreateNewRecipe(ingredientsByRecipeList, _recipe);
-                Navigation.NavigateBack(this);
+                MessageBox.Show(error.Message, "Instructions", MessageBoxButtons.OK);
             }
         }
 
@@ -183,15 +223,26 @@ namespace BloggerCookBook.Views
 
         private void addToRecipeButton_Click(object sender, EventArgs e)
         {
-            IngredientViewModel selectedIngredient = (IngredientViewModel)listOfIngredientsDataGridView.SelectedRows[0].DataBoundItem;
-            Navigation.NavigateTo(new AddIngedient(selectedIngredient.GetIngredient()), this);
+            try
+            {
+                if(listOfIngredientsDataGridView.SelectedRows.Count < 1)
+                {
+                    throw new SelectionExemption("You must select an ingredient to add to the recipe.");
+                }
+                IngredientViewModel selectedIngredient = (IngredientViewModel)listOfIngredientsDataGridView.SelectedRows[0].DataBoundItem;
+                Navigation.NavigateTo(new AddIngedient(selectedIngredient.GetIngredient()), this);
+            }
+            catch (SelectionExemption error)
+            {
+                MessageBox.Show(error.Message, "Instructions", MessageBoxButtons.OK);
+            }
         }
 
         private void removeIngredientButton_Click(object sender, EventArgs e)
         {
-            var selectedRows = recipeIngredientsDataGridView.SelectedRows.Cast<DataGridViewRow>().ToList();
-            List<IngredientByRecipeViewModel> selectedIngredientsByRecipeView = selectedRows.Select(row => (IngredientByRecipeViewModel)row.DataBoundItem).ToList();
-            selectedIngredientsByRecipeView.ForEach(selected => IngredientsInRecipeView.Remove(selected));
+            recipeIngredientsDataGridView.SelectedRows.Cast<DataGridViewRow>().ToList()
+                .Select(row => (IngredientByRecipeViewModel)row.DataBoundItem).ToList()
+                .ForEach(selected => IngredientsInRecipeView.Remove(selected));
         }
 
         private void createIngredientButton_Click(object sender, EventArgs e)

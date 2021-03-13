@@ -81,7 +81,7 @@ namespace BloggerCookBook.Views
                 }
                 if(mealRecipes.Count < 1)
                 {
-                    throw new InputExemption("You must add at least 1 recipe to a meal.");
+                    throw new InputExemption("You must add at least one recipe to a meal.");
                 }
                 exit = false;
                 if (_mealView is null)
