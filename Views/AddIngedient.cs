@@ -1,4 +1,5 @@
 ﻿using BloggerCookBook.Controllers;
+using BloggerCookBook.Exemptions;
 using BloggerCookBook.Models;
 using System;
 using System.Collections.Generic;
@@ -67,11 +68,31 @@ namespace BloggerCookBook.Views
 
         private void saveButton_Click(object sender, EventArgs e)
         {
-            exit = false;
-            var recipe = (AddEditRecipe)Navigation.PeekCurrentForm();
-            var ingredientByRecipe = new IngredientByRecipe { IngredientId = selectedIngredient.Id, MeasureUnit = unitComboBox.SelectedItem.ToString(), MeasureAmount = Convert.ToDecimal(amountTextBox.Text), CreatedBy = Globals.currentUser.Username, CreatedDate = DateTime.Now};
-            recipe.AddIngredientToRecipe(new ViewModels.IngredientByRecipeViewModel(ingredientByRecipe));
-            Navigation.NavigateBack(this);
+            try
+            {
+                if (unitComboBox.SelectedItem == null)
+                {
+                    throw new InputExemption("An ingredient requires a unit of measurement.");
+                }
+                if (amountTextBox.Text == "")
+                {
+                    throw new InputExemption("An ingredient requires an amount");
+                }
+
+                exit = false;
+                var recipe = (AddEditRecipe)Navigation.PeekCurrentForm();
+                var ingredientByRecipe = new IngredientByRecipe { IngredientId = selectedIngredient.Id, MeasureUnit = unitComboBox.SelectedItem.ToString(), MeasureAmount = Convert.ToDecimal(amountTextBox.Text), CreatedBy = Globals.currentUser.Username, CreatedDate = DateTime.Now };
+                recipe.AddIngredientToRecipe(new ViewModels.IngredientByRecipeViewModel(ingredientByRecipe));
+                Navigation.NavigateBack(this);
+            }
+            catch (InputExemption error)
+            {
+                MessageBox.Show(error.Message, "Instructions", MessageBoxButtons.OK);
+            }
+            catch (FormatException)
+            {
+                MessageBox.Show("The indgredient amount must be a number or decimal.", "Instructions", MessageBoxButtons.OK);
+            }
         }
     }
 }

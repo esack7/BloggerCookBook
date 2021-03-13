@@ -1,4 +1,5 @@
 ﻿using BloggerCookBook.Controllers;
+using BloggerCookBook.Exemptions;
 using BloggerCookBook.Models;
 using BloggerCookBook.ViewModels;
 using System;
@@ -45,10 +46,21 @@ namespace BloggerCookBook.Views
 
         private void addToMealButton_Click(object sender, EventArgs e)
         {
-            var selectedRecipe = (RecipeViewModel)listOfRecipesDataGridView.SelectedRows[0].DataBoundItem;
-            if (!mealRecipes.Contains(selectedRecipe))
+            try
             {
-                mealRecipes.Add(selectedRecipe);
+                if(listOfRecipesDataGridView.SelectedRows.Count < 1)
+                {
+                    throw new SelectionExemption("You must select a recipe to add.");
+                }
+                var selectedRecipe = (RecipeViewModel)listOfRecipesDataGridView.SelectedRows[0].DataBoundItem;
+                if (!mealRecipes.Contains(selectedRecipe))
+                {
+                    mealRecipes.Add(selectedRecipe);
+                }
+            }
+            catch (SelectionExemption error)
+            {
+                MessageBox.Show(error.Message, "Instructions", MessageBoxButtons.OK);
             }
         }
 
@@ -61,35 +73,50 @@ namespace BloggerCookBook.Views
 
         private void saveButton_Click(object sender, EventArgs e)
         {
-            exit = false;
-            if(_mealView is null)
+            try
             {
-                var meal = new Meal
+                if (typeComboBox.SelectedItem == null)
                 {
-                    UserId = Globals.currentUser.Id,
-                    Title = titleTextBox.Text,
-                    Type = typeComboBox.SelectedItem.ToString(),
-                    Date = dateTimePicker.Value,
-                    Notes = notesTextBox.Text,
-                    CreatedDate = DateTime.Now,
-                    CreatedBy = Globals.currentUser.Username
-                };
-                Globals.CreateNewMeal(meal, mealRecipes.ToList());
+                    throw new InputExemption("You must select a meal type.");
+                }
+                if(mealRecipes.Count < 1)
+                {
+                    throw new InputExemption("You must add at least one recipe to a meal.");
+                }
+                exit = false;
+                if (_mealView is null)
+                {
+                    var meal = new Meal
+                    {
+                        UserId = Globals.currentUser.Id,
+                        Title = titleTextBox.Text,
+                        Type = typeComboBox.SelectedItem.ToString(),
+                        Date = dateTimePicker.Value,
+                        Notes = notesTextBox.Text,
+                        CreatedDate = DateTime.Now,
+                        CreatedBy = Globals.currentUser.Username
+                    };
+                    Globals.CreateNewMeal(meal, mealRecipes.ToList());
+                }
+                else
+                {
+                    var updatedMeal = _mealView.GetMeal();
+                    updatedMeal.Title = titleTextBox.Text;
+                    updatedMeal.Type = typeComboBox.SelectedItem.ToString();
+                    updatedMeal.Date = dateTimePicker.Value;
+                    updatedMeal.Notes = notesTextBox.Text;
+                    updatedMeal.ModifiedDate = DateTime.Now;
+                    updatedMeal.ModifiedBy = Globals.currentUser.Username;
+                    Globals.UpdateMeal(mealRecipes.ToList(), updatedMeal, _mealView);
+                }
+                var mealPlannerForm = (MealPlanner)Navigation.PeekCurrentForm();
+                mealPlannerForm.refreshForm();
+                Navigation.NavigateBack(this);
             }
-            else
+            catch (InputExemption error)
             {
-                var updatedMeal = _mealView.GetMeal();
-                updatedMeal.Title = titleTextBox.Text;
-                updatedMeal.Type = typeComboBox.SelectedItem.ToString();
-                updatedMeal.Date = dateTimePicker.Value;
-                updatedMeal.Notes = notesTextBox.Text;
-                updatedMeal.ModifiedDate = DateTime.Now;
-                updatedMeal.ModifiedBy = Globals.currentUser.Username;
-                Globals.UpdateMeal(mealRecipes.ToList(), updatedMeal, _mealView);
+                MessageBox.Show(error.Message, "Instructions", MessageBoxButtons.OK);
             }
-            var mealPlannerForm = (MealPlanner)Navigation.PeekCurrentForm();
-            mealPlannerForm.refreshForm();
-            Navigation.NavigateBack(this);
         }
 
         private void cancelButton_Click(object sender, EventArgs e)

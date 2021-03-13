@@ -1,4 +1,5 @@
 ﻿using BloggerCookBook.Controllers;
+using BloggerCookBook.Exemptions;
 using BloggerCookBook.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -37,16 +38,46 @@ namespace BloggerCookBook.Views
 
         private void editButton_Click(object sender, EventArgs e)
         {
-            var selectedRecipeView = (RecipeViewModel)recipesDataGridView.SelectedRows[0].DataBoundItem;
-            Navigation.NavigateTo(new AddEditRecipe(selectedRecipeView), this);
-            resetForm();
+            try
+            {
+                if(recipesDataGridView.SelectedRows.Count < 1)
+                {
+                    throw new SelectionExemption("You must select a recipe to edit.");
+                }
+                if (recipesDataGridView.SelectedRows.Count > 1)
+                {
+                    throw new SelectionExemption("You can only edit one recipe at a time.");
+                }
+                var selectedRecipeView = (RecipeViewModel)recipesDataGridView.SelectedRows[0].DataBoundItem;
+                Navigation.NavigateTo(new AddEditRecipe(selectedRecipeView), this);
+                resetForm();
+            }
+            catch (SelectionExemption error)
+            {
+                MessageBox.Show(error.Message, "Instructions", MessageBoxButtons.OK);
+            }
         }
 
         private void deleteButton_Click(object sender, EventArgs e)
         {
-            var selectedRecipes = recipesDataGridView.SelectedRows.Cast<DataGridViewRow>().Select(row => (RecipeViewModel)row.DataBoundItem).ToList();
-            Globals.DeleteRecipes(selectedRecipes);
-            resetForm();
+            try
+            {
+                if (recipesDataGridView.SelectedRows.Count < 1)
+                {
+                    throw new SelectionExemption("You must select at least one recipe to delete");
+                }
+                DialogResult confirmDelete = MessageBox.Show("Are you sure you want to delete the selected recipes/s?", "Confirmation", MessageBoxButtons.YesNo);
+                if (confirmDelete == DialogResult.Yes)
+                {
+                    var selectedRecipes = recipesDataGridView.SelectedRows.Cast<DataGridViewRow>().Select(row => (RecipeViewModel)row.DataBoundItem).ToList();
+                    Globals.DeleteRecipes(selectedRecipes);
+                    resetForm();
+                }
+            }
+            catch (SelectionExemption error)
+            {
+                MessageBox.Show(error.Message, "Instructions", MessageBoxButtons.OK);
+            }
         }
 
         private void mainMenuButton_Click(object sender, EventArgs e)
