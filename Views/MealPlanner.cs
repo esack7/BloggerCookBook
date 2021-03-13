@@ -73,7 +73,7 @@ namespace BloggerCookBook.Views
                 {
                     throw new SelectionExemption("You must select a meal to delete");
                 }
-                DialogResult confirmDelete = MessageBox.Show("Are you sure you want to delete the selected recipe?", "Confirmation", MessageBoxButtons.YesNo);
+                DialogResult confirmDelete = MessageBox.Show("Are you sure you want to delete the selected meal?", "Confirmation", MessageBoxButtons.YesNo);
                 if (confirmDelete == DialogResult.Yes)
                 {
                     var selectedMeal = (MealViewModel)mealsDataGridView.SelectedRows[0].DataBoundItem;
