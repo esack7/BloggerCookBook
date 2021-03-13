@@ -82,6 +82,7 @@
     <Compile Include="Controllers\Navigation.cs" />
     <Compile Include="Controllers\SQLiteDataService.cs" />
     <Compile Include="Exemptions\LoginExemption.cs" />
+    <Compile Include="Exemptions\SelectionExemption.cs" />
     <Compile Include="Models\BookRecipe.cs" />
     <Compile Include="Models\Ingredient.cs" />
     <Compile Include="Models\IngredientByRecipe.cs" />

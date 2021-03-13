@@ -1,4 +1,5 @@
 ﻿using BloggerCookBook.Controllers;
+using BloggerCookBook.Exemptions;
 using BloggerCookBook.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -49,14 +50,40 @@ namespace BloggerCookBook.Views
 
         private void editButton_Click(object sender, EventArgs e)
         {
-            var selectedMealView = (MealViewModel)mealsDataGridView.SelectedRows[0].DataBoundItem;
-            Navigation.NavigateTo(new AddEditMeal(selectedMealView), this);
+            try
+            {
+                if(mealsDataGridView.SelectedRows.Count < 1)
+                {
+                    throw new SelectionExemption("You must select a meal to edit");
+                }
+                var selectedMealView = (MealViewModel)mealsDataGridView.SelectedRows[0].DataBoundItem;
+                Navigation.NavigateTo(new AddEditMeal(selectedMealView), this);
+            }
+            catch(SelectionExemption error)
+            {
+                MessageBox.Show(error.Message, "Instructions", MessageBoxButtons.OK);
+            }            
         }
 
         private void deleteButton_Click(object sender, EventArgs e)
         {
-            var selectedMeal = (MealViewModel)mealsDataGridView.SelectedRows[0].DataBoundItem;
-            Globals.DeleteMeal(selectedMeal);
+            try
+            {
+                if(mealsDataGridView.SelectedRows.Count < 1)
+                {
+                    throw new SelectionExemption("You must select a meal to delete");
+                }
+                DialogResult confirmDelete = MessageBox.Show("Are you sure you want to delete the selected recipe?", "Confirmation", MessageBoxButtons.YesNo);
+                if (confirmDelete == DialogResult.Yes)
+                {
+                    var selectedMeal = (MealViewModel)mealsDataGridView.SelectedRows[0].DataBoundItem;
+                    Globals.DeleteMeal(selectedMeal);
+                }
+            }
+            catch (SelectionExemption error)
+            {
+                MessageBox.Show(error.Message, "Instructions", MessageBoxButtons.OK);
+            }
         }
 
         private void MealPlanner_FormClosing(object sender, FormClosingEventArgs e)
