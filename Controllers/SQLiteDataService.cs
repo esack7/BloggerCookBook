@@ -165,5 +165,30 @@ namespace BloggerCookBook.Controllers
             database.Execute($"DELETE FROM RecipeByMeal where MealId={mealId}");
 
         }
+
+        public List<string> GetIngredientsByMealIds(int[] mealIds)
+        {
+            if(mealIds.Length == 0)
+            {
+                return new List<string>();
+            }
+            var selectWhereStatement = new StringBuilder
+            (
+                "SELECT * FROM Ingredient WHERE Id IN (SELECT DISTINCT IngredientId FROM IngredientByRecipe WHERE RecipeId IN (SELECT DISTINCT RecipeId FROM RecipeByMeal WHERE MealId IN ("
+            );
+            for (int i = 0; i < mealIds.Length; i++)
+            {
+                selectWhereStatement.Append(mealIds[i]);
+                if (i < mealIds.Length - 1)
+                {
+                    selectWhereStatement.Append(",");
+                }
+                else
+                {
+                    selectWhereStatement.Append(")))");
+                }
+            }
+            return database.Query<Ingredient>(selectWhereStatement.ToString()).Select(ingredient => ingredient.Title).ToList();
+        }
     }
 }

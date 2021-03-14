@@ -121,6 +121,7 @@ namespace BloggerCookBook.Views
             this.generateButton.TabIndex = 58;
             this.generateButton.Text = "Generate";
             this.generateButton.UseVisualStyleBackColor = true;
+            this.generateButton.Click += new System.EventHandler(this.generateButton_Click);
             // 
             // exitButton
             // 
@@ -159,6 +160,7 @@ namespace BloggerCookBook.Views
             this.Name = "Reports";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Reports";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Reports_FormClosing);
             this.ResumeLayout(false);
             this.PerformLayout();
 
