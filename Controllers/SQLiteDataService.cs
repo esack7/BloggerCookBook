@@ -168,6 +168,10 @@ namespace BloggerCookBook.Controllers
 
         public List<string> GetIngredientsByMealIds(int[] mealIds)
         {
+            if(mealIds.Length == 0)
+            {
+                return new List<string>();
+            }
             var selectWhereStatement = new StringBuilder
             (
                 "SELECT * FROM Ingredient WHERE Id IN (SELECT DISTINCT IngredientId FROM IngredientByRecipe WHERE RecipeId IN (SELECT DISTINCT RecipeId FROM RecipeByMeal WHERE MealId IN ("

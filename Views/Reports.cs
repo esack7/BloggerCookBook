@@ -1,4 +1,5 @@
 ﻿using BloggerCookBook.Controllers;
+using BloggerCookBook.Exemptions;
 using BloggerCookBook.Models;
 using System;
 using System.Collections.Generic;
@@ -37,42 +38,53 @@ namespace BloggerCookBook.Views
 
         private void generateButton_Click(object sender, EventArgs e)
         {
-            var text = new StringBuilder();
-            var start = new DateFormatter(startDateTimePicker.Value);
-            var end = new DateFormatter(endDateTimePicker.Value);
-            var mealsInDateRange = Globals.AllUsersMeals.Select(mealView => mealView.GetMeal())
-                .Where(meal => meal.Date > start.DayBeginning() && meal.Date < end.DayEnding()).ToList();
-
-            if (shoppingListRadioButton.Checked)
+            try
             {
-                text.AppendLine("Shopping List");
-                text.AppendLine($"For dates {start} to {end}");
-                text.AppendLine();
-                
-                var mealIdArray = mealsInDateRange.Select(meal => meal.Id).ToHashSet<int>().ToArray();
-                Globals.GetListOfIngredientsForMeals(mealIdArray)
-                    .ForEach(ingredient => text.AppendLine($"*\t{ingredient}"));
-                
-                reportTextBox.Text = text.ToString();
+                var text = new StringBuilder();
+                var start = new DateFormatter(startDateTimePicker.Value);
+                var end = new DateFormatter(endDateTimePicker.Value);
+                if(start.DayBeginning() > end.DayEnding())
+                {
+                    throw new InputExemption("The start date cannot be after the end date.");
+                }
+                var mealsInDateRange = Globals.AllUsersMeals.Select(mealView => mealView.GetMeal())
+                    .Where(meal => meal.Date > start.DayBeginning() && meal.Date < end.DayEnding()).ToList();
+
+                if (shoppingListRadioButton.Checked)
+                {
+                    text.AppendLine("Shopping List");
+                    text.AppendLine($"For dates {start} to {end}");
+                    text.AppendLine();
+
+                    var mealIdArray = mealsInDateRange.Select(meal => meal.Id).ToHashSet<int>().ToArray();
+                    Globals.GetListOfIngredientsForMeals(mealIdArray)
+                        .ForEach(ingredient => text.AppendLine($"*\t{ingredient}"));
+
+                    reportTextBox.Text = text.ToString();
+                }
+
+                if (topTenRadioButton.Checked)
+                {
+                    text.AppendLine($"Top Recipes for dates {start} to {end}");
+                    text.AppendLine("(Max 10)");
+                    text.AppendLine();
+                    text.AppendLine("Recipe Title\t\t|  Times Recipe Used");
+                    text.AppendLine("-----------------------------------------------------------------------------------");
+
+                    var groupOfRecipes = Globals.GetMealsRecipes(mealsInDateRange).GroupBy(recipe => recipe.Title)
+                        .OrderByDescending(recipe => recipe.Count()).Take(10);
+
+                    foreach (var group in groupOfRecipes)
+                    {
+                        text.AppendLine($"{group.Key}\t\t|    {group.Count()}");
+                    }
+
+                    reportTextBox.Text = text.ToString();
+                }
             }
-
-            if (topTenRadioButton.Checked)
+            catch (InputExemption error)
             {
-                text.AppendLine($"Top Recipes for dates {start} to {end}");
-                text.AppendLine("(Max 10)");
-                text.AppendLine();
-                text.AppendLine("Recipe Title\t\t|  Times Recipe Used");
-                text.AppendLine("-----------------------------------------------------------------------------------");
-
-                var mealIdArray = mealsInDateRange.Select(meal => meal.Id).ToArray();
-                //var groupOfRecipes = Globals.GetListOfRecipesByMealIds(mealIdArray).GroupBy(recipe => recipe);
-
-                //foreach (var group in groupOfRecipes)
-                //{
-                //    text.AppendLine($"{group.Key.Title}\t\t|  {group.Count()}");
-                //}
-
-                reportTextBox.Text = text.ToString();
+                MessageBox.Show(error.Message, "Instructions", MessageBoxButtons.OK);
             }
         }
     }

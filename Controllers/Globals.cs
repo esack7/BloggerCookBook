@@ -226,6 +226,15 @@ namespace BloggerCookBook.Controllers
             return recipeByMealList;
         }
 
+        public static List<Recipe> GetMealsRecipes(List<Meal> listOfMeals)
+        {
+            var database = new SQLiteDataService();
+            database.Initialize();
+            var recipesByMealsList = listOfMeals.SelectMany(meal => database.GetRecipesByMeal(meal.Id)).ToList();
+            database.Close();
+            return recipesByMealsList;
+        }
+
         public static List<string> GetListOfIngredientsForMeals(int[] mealIds)
         {
             var database = new SQLiteDataService();
