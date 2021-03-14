@@ -3,13 +3,10 @@ using BloggerCookBook.Exemptions;
 using BloggerCookBook.Models;
 using BloggerCookBook.ViewModels;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace BloggerCookBook.Views
@@ -20,7 +17,7 @@ namespace BloggerCookBook.Views
         private Recipe _recipe;
         private RecipeViewModel _recipeView;
         private bool exit = true;
-        private string[] categoryList = new string[] 
+        private string[] categoryList = new string[]
         {
             "Dressings & Sauces", "Appetizers", "Salads & Sandwiches", "Soups & Stews", "Vegetables", "Rice, Grains, & Beans",
             "Pasta", "Eggs & Breakfast", "Meat", "Slow Cooker/Pressure Cooker", "Bread & Pizza", "Quick Breads & Muffins", "Cookies",
@@ -46,7 +43,7 @@ namespace BloggerCookBook.Views
             titleTextBox.Text = _recipe.Title;
             categoryComboBox.SelectedItem = _recipe.Category;
             instructionsTextBox.Text = _recipe.Instructions;
-            if(_recipe.GetType() == typeof(PersonalRecipe))
+            if (_recipe.GetType() == typeof(PersonalRecipe))
             {
                 var personalRecipe = (PersonalRecipe)_recipe;
                 personalTypeRadioButton.Checked = true;
@@ -76,11 +73,11 @@ namespace BloggerCookBook.Views
         {
             try
             {
-                if(titleTextBox.Text == "")
+                if (titleTextBox.Text == "")
                 {
                     throw new InputExemption("You must supply a title.");
                 }
-                if(categoryComboBox.SelectedItem == null)
+                if (categoryComboBox.SelectedItem == null)
                 {
                     throw new InputExemption("You must select a category.");
                 }
@@ -92,11 +89,11 @@ namespace BloggerCookBook.Views
                 {
                     throw new InputExemption("You must select a recipe type.");
                 }
-                if(webTypeRadioButton.Checked && typeATextBox.Text == "")
+                if (webTypeRadioButton.Checked && typeATextBox.Text == "")
                 {
                     throw new InputExemption("A web recipe requires a URL.");
                 }
-                if(bookTypeRadioButton.Checked && typeATextBox.Text == "")
+                if (bookTypeRadioButton.Checked && typeATextBox.Text == "")
                 {
                     throw new InputExemption("A book recipe requires a book title.");
                 }
@@ -104,7 +101,7 @@ namespace BloggerCookBook.Views
                 {
                     throw new InputExemption("A book recipe requires an author.");
                 }
-                if(instructionsTextBox.Text == "")
+                if (instructionsTextBox.Text == "")
                 {
                     throw new InputExemption("A recipe requires instructions.");
                 }
@@ -229,7 +226,7 @@ namespace BloggerCookBook.Views
         {
             try
             {
-                if(listOfIngredientsDataGridView.SelectedRows.Count < 1)
+                if (listOfIngredientsDataGridView.SelectedRows.Count < 1)
                 {
                     throw new SelectionExemption("You must select an ingredient to add to the recipe.");
                 }

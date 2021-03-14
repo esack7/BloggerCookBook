@@ -1,10 +1,6 @@
 ﻿using BloggerCookBook.Controllers;
 using BloggerCookBook.Models;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BloggerCookBook.ViewModels
 {

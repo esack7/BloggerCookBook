@@ -2,9 +2,6 @@
 using BloggerCookBook.Models;
 using BloggerCookBook.Views;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace BloggerCookBook
@@ -19,7 +16,7 @@ namespace BloggerCookBook
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            InitializeData(); // remove
+            InitializeData();
             Application.Run(new AppStart());
         }
 

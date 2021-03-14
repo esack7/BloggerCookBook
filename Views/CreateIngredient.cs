@@ -1,13 +1,6 @@
 ﻿using BloggerCookBook.Controllers;
 using BloggerCookBook.Exemptions;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace BloggerCookBook.Views
@@ -18,7 +11,7 @@ namespace BloggerCookBook.Views
         public CreateIngredient()
         {
             InitializeComponent();
-            measurementComboBox.Items.AddRange(new object[] { "Weight", "Volume", "Quantity"});
+            measurementComboBox.Items.AddRange(new object[] { "Weight", "Volume", "Quantity" });
         }
 
         private void cancelButton_Click(object sender, EventArgs e)
@@ -29,7 +22,7 @@ namespace BloggerCookBook.Views
 
         private void CreateIngredient_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if(exit)
+            if (exit)
             {
                 Application.Exit();
             }
@@ -51,7 +44,7 @@ namespace BloggerCookBook.Views
                 Globals.CreateNewIngredient(nameTextBox.Text, measurementComboBox.SelectedItem.ToString());
                 Navigation.NavigateBack(this);
             }
-            catch (InputExemption error) 
+            catch (InputExemption error)
             {
                 MessageBox.Show(error.Message, "Instructions", MessageBoxButtons.OK);
             }
