@@ -226,6 +226,15 @@ namespace BloggerCookBook.Controllers
             return recipeByMealList;
         }
 
+        public static List<string> GetListOfIngredientsForMeals(int[] mealIds)
+        {
+            var database = new SQLiteDataService();
+            database.Initialize();
+            var listOfIngredients = database.GetIngredientsByMealIds(mealIds);
+            database.Close();
+            return listOfIngredients;
+        }
+
         public static void FormatDisplayedData(DataGridView dataGridView)
         {
             bool showFill = true;

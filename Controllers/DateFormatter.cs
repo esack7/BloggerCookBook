@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -50,6 +51,11 @@ namespace BloggerCookBook.Controllers
         public DateTime MonthEnding()
         {
             return this.MonthBeginning().AddMonths(1).AddMilliseconds(-1);
+        }
+
+        public override string ToString() 
+        {
+            return _originalDateTime.ToString("M-dd-yyyy", DateTimeFormatInfo.InvariantInfo);
         }
     }
 }
