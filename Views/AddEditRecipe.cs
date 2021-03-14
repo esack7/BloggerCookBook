@@ -201,11 +201,15 @@ namespace BloggerCookBook.Views
                 if (editing)
                 {
                     Globals.UpdateRecipe(ingredientsByRecipeList, _recipe, _recipeView);
+                    var recipesForm = (Recipes)Navigation.PeekCurrentForm();
+                    recipesForm.resetForm();
                     Navigation.NavigateBack(this);
                 }
                 else
                 {
                     Globals.CreateNewRecipe(ingredientsByRecipeList, _recipe);
+                    var recipesForm = (Recipes)Navigation.PeekCurrentForm();
+                    recipesForm.resetForm();
                     Navigation.NavigateBack(this);
                 }
             }

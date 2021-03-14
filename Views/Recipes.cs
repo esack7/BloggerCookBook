@@ -132,12 +132,18 @@ namespace BloggerCookBook.Views
             }
         }
 
-        private void resetForm()
+        public void resetForm()
         {
             recipesList.Clear();
-            Globals.AllUsersRecipes.ToList().ForEach(recipeView => recipesList.Add(recipeView));
+            Globals.AllUsersRecipes.ToList().ForEach(recipeView =>
+            {
+                recipesList.Add(recipeView);
+                categories.Add(recipeView.GetRecipe().Category);
+            });
             searchTextBox.Text = "";
             categoryComboBox.SelectedItem = "";
+            categoryComboBox.Items.Clear();
+            categoryComboBox.Items.AddRange(categories.ToArray());
         }
     }
 }

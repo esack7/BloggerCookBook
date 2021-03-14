@@ -76,7 +76,14 @@ namespace BloggerCookBook.Views
 
                     foreach (var group in groupOfRecipes)
                     {
-                        text.AppendLine($"{group.Key}\t\t|    {group.Count()}");
+                        if (group.Key.Length < 8)
+                        {
+                            text.AppendLine($"{group.Key}\t\t\t|    {group.Count()}");
+                        }
+                        else
+                        {
+                            text.AppendLine($"{group.Key}\t\t|    {group.Count()}");
+                        }
                     }
 
                     reportTextBox.Text = text.ToString();
