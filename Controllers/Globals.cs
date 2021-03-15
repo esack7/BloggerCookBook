@@ -5,8 +5,6 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace BloggerCookBook.Controllers
@@ -17,7 +15,7 @@ namespace BloggerCookBook.Controllers
         public static BindingList<MealViewModel> AllUsersMeals;
         public static BindingList<RecipeViewModel> AllUsersRecipes;
         public static BindingList<IngredientViewModel> AllIngredients;
-        
+
         private static int recipeId = 0;
 
         public static bool LoginCurrentUser(string username, string password)
@@ -30,7 +28,7 @@ namespace BloggerCookBook.Controllers
                 List<User> signedInUser = database.GetAllUsers().Where(user => user.Username == username).ToList();
                 database.Close();
 
-                if(username == "" || password == "")
+                if (username == "" || password == "")
                 {
                     throw new ArgumentNullException();
                 }
@@ -48,7 +46,7 @@ namespace BloggerCookBook.Controllers
                 currentUser = signedInUser.First();
                 signedIn = true;
             }
-            catch(ArgumentNullException)
+            catch (ArgumentNullException)
             {
                 throw new LoginException("You must have both User Id and a Password");
             }
@@ -105,13 +103,14 @@ namespace BloggerCookBook.Controllers
             var database = new SQLiteDataService();
             database.Initialize();
             var recipeViewModels = database.GetAllCurrentUserRecipes(currentUser.Id)
-                .Select(recipe => {
-                    if(recipe.Id > recipeId)
+                .Select(recipe =>
+                {
+                    if (recipe.Id > recipeId)
                     {
                         recipeId = recipe.Id;
                     }
                     return new RecipeViewModel(recipe);
-                 }).ToList();
+                }).ToList();
             database.Close();
             return recipeViewModels;
         }
@@ -167,7 +166,8 @@ namespace BloggerCookBook.Controllers
                 MealId = meal.Id,
                 CreatedDate = DateTime.Now,
                 CreatedBy = currentUser.Username
-            }).ToList().ForEach(rbm => {
+            }).ToList().ForEach(rbm =>
+            {
                 database.AddRecipeByMeal(rbm);
             });
             database.Close();
@@ -196,7 +196,8 @@ namespace BloggerCookBook.Controllers
                 MealId = originalMeal.Id,
                 CreatedDate = DateTime.Now,
                 CreatedBy = currentUser.Username
-            }).ToList().ForEach(rbm => {
+            }).ToList().ForEach(rbm =>
+            {
                 database.AddRecipeByMeal(rbm);
             });
             database.Close();
@@ -249,11 +250,11 @@ namespace BloggerCookBook.Controllers
             bool showFill = true;
             for (int i = 0; i < dataGridView.Columns.Count; i++)
             {
-                if(showFill)
+                if (showFill)
                 {
                     dataGridView.Columns[i].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
                     showFill = false;
-                } 
+                }
                 else
                 {
                     dataGridView.Columns[i].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;

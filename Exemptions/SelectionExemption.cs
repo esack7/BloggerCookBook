@@ -1,12 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BloggerCookBook.Exemptions
 {
-    public class SelectionExemption: ApplicationException
+    public class SelectionExemption : ApplicationException
     {
         public SelectionExemption() : base("You must make a selection")
         {

@@ -1,14 +1,7 @@
 ﻿using BloggerCookBook.Controllers;
-using BloggerCookBook.Models;
 using BloggerCookBook.ViewModels;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace BloggerCookBook.Views
@@ -23,7 +16,7 @@ namespace BloggerCookBook.Views
 
         private void MainMenu_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if(exit)
+            if (exit)
             {
                 Application.Exit();
             }

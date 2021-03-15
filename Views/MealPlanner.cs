@@ -2,14 +2,9 @@
 using BloggerCookBook.Exemptions;
 using BloggerCookBook.ViewModels;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace BloggerCookBook.Views
@@ -52,24 +47,24 @@ namespace BloggerCookBook.Views
         {
             try
             {
-                if(mealsDataGridView.SelectedRows.Count < 1)
+                if (mealsDataGridView.SelectedRows.Count < 1)
                 {
                     throw new SelectionExemption("You must select a meal to edit");
                 }
                 var selectedMealView = (MealViewModel)mealsDataGridView.SelectedRows[0].DataBoundItem;
                 Navigation.NavigateTo(new AddEditMeal(selectedMealView), this);
             }
-            catch(SelectionExemption error)
+            catch (SelectionExemption error)
             {
                 MessageBox.Show(error.Message, "Instructions", MessageBoxButtons.OK);
-            }            
+            }
         }
 
         private void deleteButton_Click(object sender, EventArgs e)
         {
             try
             {
-                if(mealsDataGridView.SelectedRows.Count < 1)
+                if (mealsDataGridView.SelectedRows.Count < 1)
                 {
                     throw new SelectionExemption("You must select a meal to delete");
                 }
@@ -108,12 +103,12 @@ namespace BloggerCookBook.Views
             {
                 start = dateFormatter.DayBeginning();
                 end = dateFormatter.DayEnding();
-            } 
+            }
             else if (weekRadioButton.Checked)
             {
                 start = dateFormatter.WeekBeginning();
                 end = dateFormatter.WeekEnding();
-            } 
+            }
             else
             {
                 start = dateFormatter.MonthBeginning();

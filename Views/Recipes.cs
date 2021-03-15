@@ -5,10 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace BloggerCookBook.Views
@@ -22,7 +19,7 @@ namespace BloggerCookBook.Views
         {
             InitializeComponent();
             recipesDataGridView.DataSource = recipesList;
-            Globals.AllUsersRecipes.ToList().ForEach(recipeView => 
+            Globals.AllUsersRecipes.ToList().ForEach(recipeView =>
             {
                 recipesList.Add(recipeView);
                 categories.Add(recipeView.GetRecipe().Category);
@@ -40,7 +37,7 @@ namespace BloggerCookBook.Views
         {
             try
             {
-                if(recipesDataGridView.SelectedRows.Count < 1)
+                if (recipesDataGridView.SelectedRows.Count < 1)
                 {
                     throw new SelectionExemption("You must select a recipe to edit.");
                 }
@@ -105,7 +102,7 @@ namespace BloggerCookBook.Views
 
         private void Recipes_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if(exit)
+            if (exit)
             {
                 Application.Exit();
             }
@@ -121,10 +118,10 @@ namespace BloggerCookBook.Views
             recipesList.Clear();
             searchTextBox.Text = "";
             var selectedValue = (string)categoryComboBox.SelectedItem;
-            if(selectedValue == "")
+            if (selectedValue == "")
             {
                 Globals.AllUsersRecipes.ToList().ForEach(recipeView => recipesList.Add(recipeView));
-            } 
+            }
             else
             {
                 var updatedRecipesList = Globals.AllUsersRecipes.Where(recipeView => recipeView.GetRecipe().Category == selectedValue).ToList();

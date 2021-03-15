@@ -1,9 +1,5 @@
 ﻿using SQLite;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BloggerCookBook.Models
 {
@@ -17,15 +13,5 @@ namespace BloggerCookBook.Models
         public DateTime CreatedDate { get; set; }
         public string ModifiedBy { get; set; }
         public DateTime ModifiedDate { get; set; }
-
-        //public Ingredient(string title, string measureType, string createdBy, DateTime createdDate, string modifiedBy, DateTime modifiedDate)
-        //{
-        //    Title = title;
-        //    MeasureType = measureType;
-        //    CreatedBy = createdBy;
-        //    CreatedDate = createdDate;
-        //    ModifiedBy = modifiedBy;
-        //    ModifiedDate = modifiedDate;
-        //}
     }
 }

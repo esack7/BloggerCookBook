@@ -1,15 +1,9 @@
 ﻿using BloggerCookBook.Controllers;
 using BloggerCookBook.Exemptions;
-using BloggerCookBook.Models;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Globalization;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace BloggerCookBook.Views
@@ -43,7 +37,7 @@ namespace BloggerCookBook.Views
                 var text = new StringBuilder();
                 var start = new DateFormatter(startDateTimePicker.Value);
                 var end = new DateFormatter(endDateTimePicker.Value);
-                if(start.DayBeginning() > end.DayEnding())
+                if (start.DayBeginning() > end.DayEnding())
                 {
                     throw new InputExemption("The start date cannot be after the end date.");
                 }

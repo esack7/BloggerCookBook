@@ -3,13 +3,9 @@ using BloggerCookBook.Exemptions;
 using BloggerCookBook.Models;
 using BloggerCookBook.ViewModels;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace BloggerCookBook.Views
@@ -48,7 +44,7 @@ namespace BloggerCookBook.Views
         {
             try
             {
-                if(listOfRecipesDataGridView.SelectedRows.Count < 1)
+                if (listOfRecipesDataGridView.SelectedRows.Count < 1)
                 {
                     throw new SelectionExemption("You must select a recipe to add.");
                 }
@@ -79,7 +75,7 @@ namespace BloggerCookBook.Views
                 {
                     throw new InputExemption("You must select a meal type.");
                 }
-                if(mealRecipes.Count < 1)
+                if (mealRecipes.Count < 1)
                 {
                     throw new InputExemption("You must add at least one recipe to a meal.");
                 }

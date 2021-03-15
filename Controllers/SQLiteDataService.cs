@@ -5,11 +5,10 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace BloggerCookBook.Controllers
 {
-    public class SQLiteDataService: ILocalDataService
+    public class SQLiteDataService : ILocalDataService
     {
         private SQLiteConnection database;
         public bool Initialize()
@@ -136,7 +135,7 @@ namespace BloggerCookBook.Controllers
             for (int i = 0; i < recipes.Length; i++)
             {
                 selectWhereStatement.Append(recipes[i]);
-                if(i < recipes.Length - 1)
+                if (i < recipes.Length - 1)
                 {
                     selectWhereStatement.Append(",");
                 }
@@ -168,7 +167,7 @@ namespace BloggerCookBook.Controllers
 
         public List<string> GetIngredientsByMealIds(int[] mealIds)
         {
-            if(mealIds.Length == 0)
+            if (mealIds.Length == 0)
             {
                 return new List<string>();
             }
