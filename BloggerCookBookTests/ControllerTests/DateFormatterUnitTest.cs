@@ -20,6 +20,7 @@ namespace BloggerCookBookTests.ControllerTests
             Assert.AreEqual(expected, actual);
         }
 
+        [TestMethod]
         public void DateFormatterReturnsCorrectToStringMethod()
         {
             //Arrange

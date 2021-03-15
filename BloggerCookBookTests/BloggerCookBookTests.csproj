@@ -51,8 +51,9 @@
   <ItemGroup>
     <Compile Include="ControllerTests\DateFormatterUnitTest.cs" />
     <Compile Include="ModelTests\RecipeUnitTest.cs" />
-    <Compile Include="UnitTest1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModelTests\RecipeViewModelUnitTest.cs" />
+    <Compile Include="ViewModelTests\MealViewModelUnitTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
