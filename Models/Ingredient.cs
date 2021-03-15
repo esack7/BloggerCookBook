@@ -13,15 +13,5 @@ namespace BloggerCookBook.Models
         public DateTime CreatedDate { get; set; }
         public string ModifiedBy { get; set; }
         public DateTime ModifiedDate { get; set; }
-
-        //public Ingredient(string title, string measureType, string createdBy, DateTime createdDate, string modifiedBy, DateTime modifiedDate)
-        //{
-        //    Title = title;
-        //    MeasureType = measureType;
-        //    CreatedBy = createdBy;
-        //    CreatedDate = createdDate;
-        //    ModifiedBy = modifiedBy;
-        //    ModifiedDate = modifiedDate;
-        //}
     }
 }
