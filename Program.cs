@@ -41,7 +41,8 @@ namespace BloggerCookBook
                 db.AddIngredient(butter);
                 db.AddIngredient(milk);
 
-                var recipe = new WebRecipe {
+                var recipe = new WebRecipe
+                {
                     Url = "https://www.food.com/recipe/biscuit-crust-17853",
                     Title = "Biscuit Crust",
                     Category = "Bread & Pizza",

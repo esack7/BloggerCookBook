@@ -1,7 +1,6 @@
 ﻿using BloggerCookBook.Models;
 using BloggerCookBook.ViewModels;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
 
 namespace BloggerCookBookTests.ViewModelTests
 {
